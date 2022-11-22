@@ -7,7 +7,7 @@ import { TopLevelSpec } from 'vega-lite';
 import { SummaryData } from '../components/Widgets/Summary';
 
 function getVisualizationSpec(description: string, data: any, layers: any[]): TopLevelSpec {
-  let spec: TopLevelSpec = {
+  return {
     config: { view: { stroke: null } },
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     description: description,
@@ -16,8 +16,6 @@ function getVisualizationSpec(description: string, data: any, layers: any[]): To
     },
     layer: layers,
   };
-
-  return spec;
 }
 
 export function getOverviewVisualizationSpec(
