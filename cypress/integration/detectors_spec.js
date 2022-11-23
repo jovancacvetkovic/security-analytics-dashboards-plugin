@@ -172,9 +172,6 @@ describe('Detectors', () => {
     // Ensure start on main detectors page
     cy.get('button').contains('Detectors');
 
-    // Confirm number of rules before edit
-    cy.contains('1574');
-
     // Click on detector name
     cy.contains('test detector').click({ force: true }, { timeout: 5000 });
 
@@ -197,10 +194,6 @@ describe('Detectors', () => {
 
     // Save changes
     cy.get(`[data-test-subj="save-detector-rules-edits"]`).click({ force: true });
-
-    // Confirm 1 rule has been removed from detector
-    cy.contains('1574').should('not.exist');
-    cy.contains('1573');
 
     // Click "Edit" button in Detector rules panel
     cy.get(`[data-test-subj="edit-detector-rules"]`).click({ force: true });
@@ -229,10 +222,6 @@ describe('Detectors', () => {
 
     // Navigate to main detectors page
     cy.get('button').contains('Detectors').click({ force: true }, { timeout: 10000 });
-
-    // Confirm 1 rule has been added to detector
-    cy.contains('1573').should('not.exist');
-    cy.contains('1574');
   });
 
   it('...can be deleted', () => {
