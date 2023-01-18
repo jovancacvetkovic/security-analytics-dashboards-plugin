@@ -72,21 +72,14 @@ describe('Detectors', () => {
       .focus()
       .realType(indexName);
 
-    cy.intercept({
-      pathname: '/_plugins/_security_analytics/rules/_search',
-      query: {
-        prePackaged: 'true',
-      },
-    }).as('getSigmaRules');
-
     // Select threat detector type (Windows logs)
     cy.get(`input[id="windows"]`).click({ force: true });
 
-    cy.wait('@getSigmaRules').then(() => {
-      // Open Detection rules accordion
-      cy.get('[data-test-subj="detection-rules-btn"]').click({ force: true, timeout: 5000 });
+    // Open Detection rules accordion
+    cy.get('[data-test-subj="detection-rules-btn"]').click({ force: true, timeout: 5000 });
 
-      cy.contains('tr', 'Windows', {
+    cy.get('#detectorRulesAccordion').within(() => {
+      cy.contains('table tr', 'Windows', {
         timeout: 60000,
       });
 
@@ -94,7 +87,7 @@ describe('Detectors', () => {
       cy.get(`input[placeholder="Search..."]`).ospSearch('USB Device Plugged');
 
       // Disable all rules
-      cy.contains('tr', 'USB Device Plugged');
+      cy.contains('table tr', 'USB Device Plugged');
 
       cy.get('table th').within(() => {
         cy.get('button').first().click({ force: true });
