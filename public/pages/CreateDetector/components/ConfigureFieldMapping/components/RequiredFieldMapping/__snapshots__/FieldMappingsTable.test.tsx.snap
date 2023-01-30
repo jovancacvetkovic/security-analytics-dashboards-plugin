@@ -1,0 +1,1606 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FieldMappingsTable /> spec renders the component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="euiBasicTable"
+      >
+        <div>
+          <div
+            class="euiTableHeaderMobile"
+          >
+            <div
+              class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsBaseline euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+            >
+              <div
+                class="euiFlexItem euiFlexItem--flexGrowZero"
+              />
+              <div
+                class="euiFlexItem euiFlexItem--flexGrowZero"
+              />
+            </div>
+          </div>
+          <table
+            class="euiTable euiTable--responsive"
+            id="some_html_id"
+            tabindex="-1"
+          >
+            <caption
+              class="euiScreenReaderOnly euiTableCaption"
+            />
+            <thead>
+              <tr>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_ruleFieldName_0"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 25%;"
+                >
+                  <span
+                    class="euiTableCellContent"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Rule field name"
+                    >
+                      Rule field name
+                    </span>
+                  </span>
+                </th>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_Maps to_1"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 15%;"
+                >
+                  <span
+                    class="euiTableCellContent euiTableCellContent--alignCenter"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Maps to"
+                    >
+                      Maps to
+                    </span>
+                  </span>
+                </th>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_logFieldName_2"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 45%;"
+                >
+                  <span
+                    class="euiTableCellContent"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Log field name"
+                    >
+                      Log field name
+                    </span>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="euiTableRow"
+              >
+                <td
+                  class="euiTableRowCell"
+                  style="width: 25%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Rule field name
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--overflowingContent"
+                  >
+                    mockRuleField
+                  </div>
+                </td>
+                <td
+                  class="euiTableRowCell"
+                  style="width: 15%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Maps to
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--alignCenter euiTableCellContent--overflowingContent"
+                  >
+                    EuiIconMock
+                  </div>
+                </td>
+                <td
+                  class="euiTableRowCell"
+                  style="width: 45%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Log field name
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--overflowingContent"
+                  >
+                    <div
+                      class="euiText euiText--medium"
+                    >
+                      <span>
+                        mockField
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div
+            class="euiSpacer euiSpacer--m"
+          />
+          <div
+            class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsCenter euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+          >
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            >
+              <div
+                class="euiPopover euiPopover--anchorUpRight"
+              >
+                <div
+                  class="euiPopover__anchor"
+                >
+                  <button
+                    class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--xSmall"
+                    data-test-subj="tablePaginationPopoverButton"
+                    type="button"
+                  >
+                    <span
+                      class="euiButtonContent euiButtonContent--iconRight euiButtonEmpty__content"
+                    >
+                      EuiIconMock
+                      <span
+                        class="euiButtonEmpty__text"
+                      >
+                        Rows per page
+                        : 
+                        10
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            >
+              <nav
+                class="euiPagination"
+              >
+                <button
+                  aria-label="Previous page"
+                  class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                  data-test-subj="pagination-button-previous"
+                  disabled=""
+                  type="button"
+                >
+                  EuiIconMock
+                </button>
+                <ul
+                  class="euiPagination__list"
+                >
+                  <li
+                    class="euiPagination__item"
+                  >
+                    <button
+                      aria-controls="some_html_id"
+                      aria-current="true"
+                      aria-label="Page 1 of 1"
+                      class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--small euiButtonEmpty-isDisabled euiPaginationButton euiPaginationButton-isActive euiPaginationButton--hideOnMobile"
+                      data-test-subj="pagination-button-0"
+                      disabled=""
+                      type="button"
+                    >
+                      <span
+                        class="euiButtonContent euiButtonEmpty__content"
+                      >
+                        <span
+                          class="euiButtonEmpty__text"
+                        >
+                          1
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+                <button
+                  aria-label="Next page"
+                  class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                  data-test-subj="pagination-button-next"
+                  disabled=""
+                  type="button"
+                >
+                  EuiIconMock
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="euiBasicTable"
+    >
+      <div>
+        <div
+          class="euiTableHeaderMobile"
+        >
+          <div
+            class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsBaseline euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+          >
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            />
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            />
+          </div>
+        </div>
+        <table
+          class="euiTable euiTable--responsive"
+          id="some_html_id"
+          tabindex="-1"
+        >
+          <caption
+            class="euiScreenReaderOnly euiTableCaption"
+          />
+          <thead>
+            <tr>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_ruleFieldName_0"
+                role="columnheader"
+                scope="col"
+                style="width: 25%;"
+              >
+                <span
+                  class="euiTableCellContent"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Rule field name"
+                  >
+                    Rule field name
+                  </span>
+                </span>
+              </th>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_Maps to_1"
+                role="columnheader"
+                scope="col"
+                style="width: 15%;"
+              >
+                <span
+                  class="euiTableCellContent euiTableCellContent--alignCenter"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Maps to"
+                  >
+                    Maps to
+                  </span>
+                </span>
+              </th>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_logFieldName_2"
+                role="columnheader"
+                scope="col"
+                style="width: 45%;"
+              >
+                <span
+                  class="euiTableCellContent"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Log field name"
+                  >
+                    Log field name
+                  </span>
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="euiTableRow"
+            >
+              <td
+                class="euiTableRowCell"
+                style="width: 25%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Rule field name
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--overflowingContent"
+                >
+                  mockRuleField
+                </div>
+              </td>
+              <td
+                class="euiTableRowCell"
+                style="width: 15%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Maps to
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--alignCenter euiTableCellContent--overflowingContent"
+                >
+                  EuiIconMock
+                </div>
+              </td>
+              <td
+                class="euiTableRowCell"
+                style="width: 45%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Log field name
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--overflowingContent"
+                >
+                  <div
+                    class="euiText euiText--medium"
+                  >
+                    <span>
+                      mockField
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div
+          class="euiSpacer euiSpacer--m"
+        />
+        <div
+          class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsCenter euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+        >
+          <div
+            class="euiFlexItem euiFlexItem--flexGrowZero"
+          >
+            <div
+              class="euiPopover euiPopover--anchorUpRight"
+            >
+              <div
+                class="euiPopover__anchor"
+              >
+                <button
+                  class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--xSmall"
+                  data-test-subj="tablePaginationPopoverButton"
+                  type="button"
+                >
+                  <span
+                    class="euiButtonContent euiButtonContent--iconRight euiButtonEmpty__content"
+                  >
+                    EuiIconMock
+                    <span
+                      class="euiButtonEmpty__text"
+                    >
+                      Rows per page
+                      : 
+                      10
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="euiFlexItem euiFlexItem--flexGrowZero"
+          >
+            <nav
+              class="euiPagination"
+            >
+              <button
+                aria-label="Previous page"
+                class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                data-test-subj="pagination-button-previous"
+                disabled=""
+                type="button"
+              >
+                EuiIconMock
+              </button>
+              <ul
+                class="euiPagination__list"
+              >
+                <li
+                  class="euiPagination__item"
+                >
+                  <button
+                    aria-controls="some_html_id"
+                    aria-current="true"
+                    aria-label="Page 1 of 1"
+                    class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--small euiButtonEmpty-isDisabled euiPaginationButton euiPaginationButton-isActive euiPaginationButton--hideOnMobile"
+                    data-test-subj="pagination-button-0"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="euiButtonContent euiButtonEmpty__content"
+                    >
+                      <span
+                        class="euiButtonEmpty__text"
+                      >
+                        1
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              </ul>
+              <button
+                aria-label="Next page"
+                class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                data-test-subj="pagination-button-next"
+                disabled=""
+                type="button"
+              >
+                EuiIconMock
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<FieldMappingsTable /> spec renders the component 2`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="euiBasicTable"
+      >
+        <div>
+          <div
+            class="euiTableHeaderMobile"
+          >
+            <div
+              class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsBaseline euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+            >
+              <div
+                class="euiFlexItem euiFlexItem--flexGrowZero"
+              />
+              <div
+                class="euiFlexItem euiFlexItem--flexGrowZero"
+              />
+            </div>
+          </div>
+          <table
+            class="euiTable euiTable--responsive"
+            id="some_html_id"
+            tabindex="-1"
+          >
+            <caption
+              class="euiScreenReaderOnly euiTableCaption"
+            />
+            <thead>
+              <tr>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_ruleFieldName_0"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 25%;"
+                >
+                  <span
+                    class="euiTableCellContent"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Rule field name"
+                    >
+                      Rule field name
+                    </span>
+                  </span>
+                </th>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_Maps to_1"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 15%;"
+                >
+                  <span
+                    class="euiTableCellContent euiTableCellContent--alignCenter"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Maps to"
+                    >
+                      Maps to
+                    </span>
+                  </span>
+                </th>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_logFieldName_2"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 45%;"
+                >
+                  <span
+                    class="euiTableCellContent"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Log field name"
+                    >
+                      Log field name
+                    </span>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="euiTableRow"
+              >
+                <td
+                  class="euiTableRowCell"
+                  style="width: 25%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Rule field name
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--overflowingContent"
+                  >
+                    mockRuleField
+                  </div>
+                </td>
+                <td
+                  class="euiTableRowCell"
+                  style="width: 15%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Maps to
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--alignCenter euiTableCellContent--overflowingContent"
+                  >
+                    EuiIconMock
+                  </div>
+                </td>
+                <td
+                  class="euiTableRowCell"
+                  style="width: 45%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Log field name
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--overflowingContent"
+                  >
+                    <div
+                      class="euiText euiText--medium"
+                    >
+                      <span>
+                        mockField
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div
+            class="euiSpacer euiSpacer--m"
+          />
+          <div
+            class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsCenter euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+          >
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            >
+              <div
+                class="euiPopover euiPopover--anchorUpRight"
+              >
+                <div
+                  class="euiPopover__anchor"
+                >
+                  <button
+                    class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--xSmall"
+                    data-test-subj="tablePaginationPopoverButton"
+                    type="button"
+                  >
+                    <span
+                      class="euiButtonContent euiButtonContent--iconRight euiButtonEmpty__content"
+                    >
+                      EuiIconMock
+                      <span
+                        class="euiButtonEmpty__text"
+                      >
+                        Rows per page
+                        : 
+                        10
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            >
+              <nav
+                class="euiPagination"
+              >
+                <button
+                  aria-label="Previous page"
+                  class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                  data-test-subj="pagination-button-previous"
+                  disabled=""
+                  type="button"
+                >
+                  EuiIconMock
+                </button>
+                <ul
+                  class="euiPagination__list"
+                >
+                  <li
+                    class="euiPagination__item"
+                  >
+                    <button
+                      aria-controls="some_html_id"
+                      aria-current="true"
+                      aria-label="Page 1 of 1"
+                      class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--small euiButtonEmpty-isDisabled euiPaginationButton euiPaginationButton-isActive euiPaginationButton--hideOnMobile"
+                      data-test-subj="pagination-button-0"
+                      disabled=""
+                      type="button"
+                    >
+                      <span
+                        class="euiButtonContent euiButtonEmpty__content"
+                      >
+                        <span
+                          class="euiButtonEmpty__text"
+                        >
+                          1
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+                <button
+                  aria-label="Next page"
+                  class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                  data-test-subj="pagination-button-next"
+                  disabled=""
+                  type="button"
+                >
+                  EuiIconMock
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="euiBasicTable"
+    >
+      <div>
+        <div
+          class="euiTableHeaderMobile"
+        >
+          <div
+            class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsBaseline euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+          >
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            />
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            />
+          </div>
+        </div>
+        <table
+          class="euiTable euiTable--responsive"
+          id="some_html_id"
+          tabindex="-1"
+        >
+          <caption
+            class="euiScreenReaderOnly euiTableCaption"
+          />
+          <thead>
+            <tr>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_ruleFieldName_0"
+                role="columnheader"
+                scope="col"
+                style="width: 25%;"
+              >
+                <span
+                  class="euiTableCellContent"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Rule field name"
+                  >
+                    Rule field name
+                  </span>
+                </span>
+              </th>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_Maps to_1"
+                role="columnheader"
+                scope="col"
+                style="width: 15%;"
+              >
+                <span
+                  class="euiTableCellContent euiTableCellContent--alignCenter"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Maps to"
+                  >
+                    Maps to
+                  </span>
+                </span>
+              </th>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_logFieldName_2"
+                role="columnheader"
+                scope="col"
+                style="width: 45%;"
+              >
+                <span
+                  class="euiTableCellContent"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Log field name"
+                  >
+                    Log field name
+                  </span>
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="euiTableRow"
+            >
+              <td
+                class="euiTableRowCell"
+                style="width: 25%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Rule field name
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--overflowingContent"
+                >
+                  mockRuleField
+                </div>
+              </td>
+              <td
+                class="euiTableRowCell"
+                style="width: 15%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Maps to
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--alignCenter euiTableCellContent--overflowingContent"
+                >
+                  EuiIconMock
+                </div>
+              </td>
+              <td
+                class="euiTableRowCell"
+                style="width: 45%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Log field name
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--overflowingContent"
+                >
+                  <div
+                    class="euiText euiText--medium"
+                  >
+                    <span>
+                      mockField
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div
+          class="euiSpacer euiSpacer--m"
+        />
+        <div
+          class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsCenter euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+        >
+          <div
+            class="euiFlexItem euiFlexItem--flexGrowZero"
+          >
+            <div
+              class="euiPopover euiPopover--anchorUpRight"
+            >
+              <div
+                class="euiPopover__anchor"
+              >
+                <button
+                  class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--xSmall"
+                  data-test-subj="tablePaginationPopoverButton"
+                  type="button"
+                >
+                  <span
+                    class="euiButtonContent euiButtonContent--iconRight euiButtonEmpty__content"
+                  >
+                    EuiIconMock
+                    <span
+                      class="euiButtonEmpty__text"
+                    >
+                      Rows per page
+                      : 
+                      10
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="euiFlexItem euiFlexItem--flexGrowZero"
+          >
+            <nav
+              class="euiPagination"
+            >
+              <button
+                aria-label="Previous page"
+                class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                data-test-subj="pagination-button-previous"
+                disabled=""
+                type="button"
+              >
+                EuiIconMock
+              </button>
+              <ul
+                class="euiPagination__list"
+              >
+                <li
+                  class="euiPagination__item"
+                >
+                  <button
+                    aria-controls="some_html_id"
+                    aria-current="true"
+                    aria-label="Page 1 of 1"
+                    class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--small euiButtonEmpty-isDisabled euiPaginationButton euiPaginationButton-isActive euiPaginationButton--hideOnMobile"
+                    data-test-subj="pagination-button-0"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="euiButtonContent euiButtonEmpty__content"
+                    >
+                      <span
+                        class="euiButtonEmpty__text"
+                      >
+                        1
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              </ul>
+              <button
+                aria-label="Next page"
+                class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                data-test-subj="pagination-button-next"
+                disabled=""
+                type="button"
+              >
+                EuiIconMock
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<FieldMappingsTable /> spec renders the readonly component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="euiBasicTable"
+      >
+        <div>
+          <div
+            class="euiTableHeaderMobile"
+          >
+            <div
+              class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsBaseline euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+            >
+              <div
+                class="euiFlexItem euiFlexItem--flexGrowZero"
+              />
+              <div
+                class="euiFlexItem euiFlexItem--flexGrowZero"
+              />
+            </div>
+          </div>
+          <table
+            class="euiTable euiTable--responsive"
+            id="some_html_id"
+            tabindex="-1"
+          >
+            <caption
+              class="euiScreenReaderOnly euiTableCaption"
+            />
+            <thead>
+              <tr>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_ruleFieldName_0"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 25%;"
+                >
+                  <span
+                    class="euiTableCellContent"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Rule field name"
+                    >
+                      Rule field name
+                    </span>
+                  </span>
+                </th>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_Maps to_1"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 15%;"
+                >
+                  <span
+                    class="euiTableCellContent euiTableCellContent--alignCenter"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Maps to"
+                    >
+                      Maps to
+                    </span>
+                  </span>
+                </th>
+                <th
+                  class="euiTableHeaderCell"
+                  data-test-subj="tableHeaderCell_logFieldName_2"
+                  role="columnheader"
+                  scope="col"
+                  style="width: 45%;"
+                >
+                  <span
+                    class="euiTableCellContent"
+                  >
+                    <span
+                      class="euiTableCellContent__text"
+                      title="Log field name"
+                    >
+                      Log field name
+                    </span>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="euiTableRow"
+              >
+                <td
+                  class="euiTableRowCell"
+                  style="width: 25%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Rule field name
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--overflowingContent"
+                  >
+                    mockRuleField
+                  </div>
+                </td>
+                <td
+                  class="euiTableRowCell"
+                  style="width: 15%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Maps to
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--alignCenter euiTableCellContent--overflowingContent"
+                  >
+                    EuiIconMock
+                  </div>
+                </td>
+                <td
+                  class="euiTableRowCell"
+                  style="width: 45%;"
+                >
+                  <div
+                    class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                  >
+                    Log field name
+                  </div>
+                  <div
+                    class="euiTableCellContent euiTableCellContent--overflowingContent"
+                  >
+                    <div
+                      class="euiText euiText--medium"
+                    >
+                      <span>
+                        mockField
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div
+            class="euiSpacer euiSpacer--m"
+          />
+          <div
+            class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsCenter euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+          >
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            >
+              <div
+                class="euiPopover euiPopover--anchorUpRight"
+              >
+                <div
+                  class="euiPopover__anchor"
+                >
+                  <button
+                    class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--xSmall"
+                    data-test-subj="tablePaginationPopoverButton"
+                    type="button"
+                  >
+                    <span
+                      class="euiButtonContent euiButtonContent--iconRight euiButtonEmpty__content"
+                    >
+                      EuiIconMock
+                      <span
+                        class="euiButtonEmpty__text"
+                      >
+                        Rows per page
+                        : 
+                        10
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            >
+              <nav
+                class="euiPagination"
+              >
+                <button
+                  aria-label="Previous page"
+                  class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                  data-test-subj="pagination-button-previous"
+                  disabled=""
+                  type="button"
+                >
+                  EuiIconMock
+                </button>
+                <ul
+                  class="euiPagination__list"
+                >
+                  <li
+                    class="euiPagination__item"
+                  >
+                    <button
+                      aria-controls="some_html_id"
+                      aria-current="true"
+                      aria-label="Page 1 of 1"
+                      class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--small euiButtonEmpty-isDisabled euiPaginationButton euiPaginationButton-isActive euiPaginationButton--hideOnMobile"
+                      data-test-subj="pagination-button-0"
+                      disabled=""
+                      type="button"
+                    >
+                      <span
+                        class="euiButtonContent euiButtonEmpty__content"
+                      >
+                        <span
+                          class="euiButtonEmpty__text"
+                        >
+                          1
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+                <button
+                  aria-label="Next page"
+                  class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                  data-test-subj="pagination-button-next"
+                  disabled=""
+                  type="button"
+                >
+                  EuiIconMock
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="euiBasicTable"
+    >
+      <div>
+        <div
+          class="euiTableHeaderMobile"
+        >
+          <div
+            class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsBaseline euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+          >
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            />
+            <div
+              class="euiFlexItem euiFlexItem--flexGrowZero"
+            />
+          </div>
+        </div>
+        <table
+          class="euiTable euiTable--responsive"
+          id="some_html_id"
+          tabindex="-1"
+        >
+          <caption
+            class="euiScreenReaderOnly euiTableCaption"
+          />
+          <thead>
+            <tr>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_ruleFieldName_0"
+                role="columnheader"
+                scope="col"
+                style="width: 25%;"
+              >
+                <span
+                  class="euiTableCellContent"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Rule field name"
+                  >
+                    Rule field name
+                  </span>
+                </span>
+              </th>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_Maps to_1"
+                role="columnheader"
+                scope="col"
+                style="width: 15%;"
+              >
+                <span
+                  class="euiTableCellContent euiTableCellContent--alignCenter"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Maps to"
+                  >
+                    Maps to
+                  </span>
+                </span>
+              </th>
+              <th
+                class="euiTableHeaderCell"
+                data-test-subj="tableHeaderCell_logFieldName_2"
+                role="columnheader"
+                scope="col"
+                style="width: 45%;"
+              >
+                <span
+                  class="euiTableCellContent"
+                >
+                  <span
+                    class="euiTableCellContent__text"
+                    title="Log field name"
+                  >
+                    Log field name
+                  </span>
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="euiTableRow"
+            >
+              <td
+                class="euiTableRowCell"
+                style="width: 25%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Rule field name
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--overflowingContent"
+                >
+                  mockRuleField
+                </div>
+              </td>
+              <td
+                class="euiTableRowCell"
+                style="width: 15%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Maps to
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--alignCenter euiTableCellContent--overflowingContent"
+                >
+                  EuiIconMock
+                </div>
+              </td>
+              <td
+                class="euiTableRowCell"
+                style="width: 45%;"
+              >
+                <div
+                  class="euiTableRowCell__mobileHeader euiTableRowCell--hideForDesktop"
+                >
+                  Log field name
+                </div>
+                <div
+                  class="euiTableCellContent euiTableCellContent--overflowingContent"
+                >
+                  <div
+                    class="euiText euiText--medium"
+                  >
+                    <span>
+                      mockField
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div
+          class="euiSpacer euiSpacer--m"
+        />
+        <div
+          class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--alignItemsCenter euiFlexGroup--justifyContentSpaceBetween euiFlexGroup--directionRow"
+        >
+          <div
+            class="euiFlexItem euiFlexItem--flexGrowZero"
+          >
+            <div
+              class="euiPopover euiPopover--anchorUpRight"
+            >
+              <div
+                class="euiPopover__anchor"
+              >
+                <button
+                  class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--xSmall"
+                  data-test-subj="tablePaginationPopoverButton"
+                  type="button"
+                >
+                  <span
+                    class="euiButtonContent euiButtonContent--iconRight euiButtonEmpty__content"
+                  >
+                    EuiIconMock
+                    <span
+                      class="euiButtonEmpty__text"
+                    >
+                      Rows per page
+                      : 
+                      10
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="euiFlexItem euiFlexItem--flexGrowZero"
+          >
+            <nav
+              class="euiPagination"
+            >
+              <button
+                aria-label="Previous page"
+                class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                data-test-subj="pagination-button-previous"
+                disabled=""
+                type="button"
+              >
+                EuiIconMock
+              </button>
+              <ul
+                class="euiPagination__list"
+              >
+                <li
+                  class="euiPagination__item"
+                >
+                  <button
+                    aria-controls="some_html_id"
+                    aria-current="true"
+                    aria-label="Page 1 of 1"
+                    class="euiButtonEmpty euiButtonEmpty--text euiButtonEmpty--small euiButtonEmpty-isDisabled euiPaginationButton euiPaginationButton-isActive euiPaginationButton--hideOnMobile"
+                    data-test-subj="pagination-button-0"
+                    disabled=""
+                    type="button"
+                  >
+                    <span
+                      class="euiButtonContent euiButtonEmpty__content"
+                    >
+                      <span
+                        class="euiButtonEmpty__text"
+                      >
+                        1
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              </ul>
+              <button
+                aria-label="Next page"
+                class="euiButtonIcon euiButtonIcon--text euiButtonIcon--empty euiButtonIcon--xSmall"
+                data-test-subj="pagination-button-next"
+                disabled=""
+                type="button"
+              >
+                EuiIconMock
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
