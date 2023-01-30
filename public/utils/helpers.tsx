@@ -23,10 +23,11 @@ import {
 } from '../pages/CreateDetector/components/DefineDetector/components/DetectionRules/types/interfaces';
 import { compile, TopLevelSpec } from 'vega-lite';
 import { parse, View } from 'vega/build-es5/vega.js';
-import { expressionInterpreter as vegaExpressionInterpreter } from 'vega-interpreter/build/vega-interpreter.module';
+import { expressionInterpreter as vegaExpressionInterpreter } from 'vega-interpreter/build/vega-interpreter';
 import { RuleInfo } from '../../server/models/interfaces';
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { OpenSearchService } from '../services';
+import { ruleTypes } from '../pages/Rules/utils/constants';
 import { Handler } from 'vega-tooltip';
 
 export const parseStringsToOptions = (strings: string[]) => {
@@ -44,7 +45,7 @@ export function createTextDetailsGroup(
   columnNum?: number
 ) {
   const createFormRow = (label: string, content: string, url?: string) => {
-    const dataTestSubj = label.toLowerCase().replaceAll(' ', '-');
+    const dataTestSubj = label.toLowerCase().replace('/ /g', '-');
     return (
       <EuiFormRow label={<EuiText color={'subdued'}>{label}</EuiText>}>
         {url ? (
@@ -242,4 +243,11 @@ export const getPlugins = async (opensearchService: OpenSearchService) => {
   } catch (e) {
     return [];
   }
+};
+
+export const formatRuleType = (matchingRuleType: string) => {
+  return (
+    ruleTypes.find((ruleType) => ruleType.value === matchingRuleType.toLowerCase())?.label ||
+    DEFAULT_EMPTY_DATA
+  );
 };
