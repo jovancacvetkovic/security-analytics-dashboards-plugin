@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`helper utilities spec tests createSelectedOptions function  - should match the snapshot 1`] = `
+Array [
+  Object {
+    "id": "1 Highest",
+    "label": "1 Highest",
+  },
+]
+`;
+
+exports[`helper utilities spec tests getEmptyAlertCondition function  - should match the snapshot 1`] = `
+Object {
+  "actions": Array [
+    Object {
+      "destination_id": "",
+      "id": "",
+      "message_template": Object {
+        "lang": "mustache",
+        "source": "",
+      },
+      "name": "",
+      "subject_template": Object {
+        "lang": "mustache",
+        "source": "",
+      },
+      "throttle": Object {
+        "unit": "MINUTES",
+        "value": 10,
+      },
+      "throttle_enabled": false,
+    },
+  ],
+  "ids": Array [],
+  "name": "",
+  "sev_levels": Array [],
+  "severity": "1",
+  "tags": Array [],
+  "types": Array [],
+}
+`;
+
+exports[`helper utilities spec tests getNotificationChannels function  - should match the snapshot 1`] = `Promise {}`;
+
+exports[`helper utilities spec tests parseAlertSeverityToOption function  - should match the snapshot 1`] = `
+Object {
+  "id": "1",
+  "label": "1 (Highest)",
+  "text": "1 (Highest)",
+  "value": "1",
+}
+`;
+
+exports[`helper utilities spec tests parseNotificationChannelsToOptions function  - should match the snapshot 1`] = `
+Array [
+  Object {
+    "label": "slack",
+    "options": Array [],
+  },
+  Object {
+    "label": "email",
+    "options": Array [],
+  },
+  Object {
+    "label": "chime",
+    "options": Array [],
+  },
+  Object {
+    "label": "webhook",
+    "options": Array [],
+  },
+  Object {
+    "label": "ses",
+    "options": Array [],
+  },
+  Object {
+    "label": "sns",
+    "options": Array [],
+  },
+]
+`;

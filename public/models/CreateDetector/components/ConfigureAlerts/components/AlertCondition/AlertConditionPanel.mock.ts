@@ -27,7 +27,7 @@ export const mockAlertCondition: AlertCondition = {
 
   // Alert related fields
   actions: [mockTriggerAction],
-  severity: 'low',
+  severity: '1',
 };
 
 export const mockNotificationChannelOption: NotificationChannelOption = {
@@ -46,7 +46,7 @@ export const mockRulesPage: RulesPage = {
 export const mockRuleOptions: RuleOptions = {
   name: 'RuleOptionsName',
   id: 'RuleOptionsID',
-  severity: 'low',
+  severity: '1',
   tags: ['mock.tag'],
 };
 export const mockCreateDetectorRulesOptions: CreateDetectorRulesOptions = {
