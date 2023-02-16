@@ -10,6 +10,7 @@ import {
   FieldMappingService,
   DetectorService,
   NotificationsService,
+  UebaService,
 } from '../../services';
 import AlertService from '../../services/AlertService';
 import RulesService from '../../services/RuleService';
@@ -28,6 +29,7 @@ export interface SecurityAnalyticsApi {
   readonly CHANNELS: string;
   readonly PLUGINS: string;
   readonly ACKNOWLEDGE_ALERTS: string;
+  readonly UEBA_BASE: string;
 }
 
 export interface NodeServices {
@@ -39,6 +41,7 @@ export interface NodeServices {
   alertService: AlertService;
   rulesService: RulesService;
   notificationsService: NotificationsService;
+  uebaServices: UebaService;
 }
 
 export interface GetIndicesResponse {

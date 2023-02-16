@@ -25,6 +25,7 @@ export const ROUTES = Object.freeze({
   FINDINGS: '/findings',
   OVERVIEW: '/overview',
   RULES: '/rules',
+  UEBA: '/ueba',
   RULES_CREATE: '/create-rule',
   RULES_EDIT: '/edit-rule',
   RULES_IMPORT: '/import-rule',
@@ -35,6 +36,10 @@ export const ROUTES = Object.freeze({
   EDIT_DETECTOR_RULES: '/edit-detector-rules',
   EDIT_FIELD_MAPPINGS: '/edit-field-mappings',
   EDIT_DETECTOR_ALERT_TRIGGERS: '/edit-alert-triggers',
+  UEBA_CREATE_AGGREGATOR: '/ueba/create-aggregator',
+  UEBA_CREATE_INFERENCE: '/ueba/create-inference-model',
+  UEBA_VIEW_AGGREGATORS: '/ueba/view-aggregators',
+  UEBA_VIEW_INFERENCES: '/ueba/view-inference-models',
 
   get LANDING_PAGE(): string {
     return this.OVERVIEW;
@@ -61,6 +66,23 @@ export const BREADCRUMBS = Object.freeze({
   RULES_EDIT: { text: 'Edit rule', href: `#${ROUTES.RULES_EDIT}` },
   RULES_DUPLICATE: { text: 'Duplicate rule', href: `#${ROUTES.RULES_DUPLICATE}` },
   RULES_IMPORT: { text: 'Import rule', href: `#${ROUTES.RULES_IMPORT}` },
+  UEBA: { text: 'UEBA', href: `#${ROUTES.UEBA}` },
+  UEBA_CREATE_AGGREGATOR: {
+    text: 'Create UEBA aggregator',
+    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATOR}`,
+  },
+  UEBA_CREATE_INFERENCE: {
+    text: 'Create UEBA inference model',
+    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_INFERENCE}`,
+  },
+  UEBA_VIEW_AGGREGATORS: {
+    text: 'View aggregators',
+    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_AGGREGATORS}`,
+  },
+  UEBA_VIEW_INFERENCES: {
+    text: 'View inference models',
+    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_INFERENCES}`,
+  },
 });
 
 export enum SortDirection {

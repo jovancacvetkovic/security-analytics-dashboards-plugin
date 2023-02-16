@@ -11,6 +11,7 @@ import FieldMappingService from './FieldMappingService';
 import AlertService from './AlertService';
 import RulesService from './RuleService';
 import NotificationsService from './NotificationsService';
+import UebaService from './UebaService';
 
 export {
   DetectorService,
@@ -21,4 +22,5 @@ export {
   AlertService,
   RulesService,
   NotificationsService,
+  UebaService,
 };

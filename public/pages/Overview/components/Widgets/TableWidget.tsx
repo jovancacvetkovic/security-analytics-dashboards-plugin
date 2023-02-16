@@ -9,8 +9,7 @@ import { TableWidgetItem, TableWidgetProps } from '../../models/types';
 
 export class TableWidget<T extends TableWidgetItem> extends React.Component<TableWidgetProps<T>> {
   render() {
-    const { columns, items, loading = false } = this.props;
-
+    const { columns, items, loading = false, search = undefined } = this.props;
     return (
       <EuiInMemoryTable<T>
         compressed
@@ -19,6 +18,7 @@ export class TableWidget<T extends TableWidgetItem> extends React.Component<Tabl
         itemId={(item: T) => `${item.id}`}
         pagination={{ pageSize: 10, pageSizeOptions: [10] }}
         loading={loading}
+        search={search}
       />
     );
   }

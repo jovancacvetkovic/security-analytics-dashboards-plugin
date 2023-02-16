@@ -13,6 +13,7 @@ import {
   RuleService,
   NotificationsService,
   IndexPatternsService,
+  UebaService,
 } from '../services';
 
 export interface BrowserServices {
@@ -25,6 +26,7 @@ export interface BrowserServices {
   ruleService: RuleService;
   notificationsService: NotificationsService;
   indexPatternsService: IndexPatternsService;
+  uebaService: UebaService;
 }
 
 export interface RuleOptions {

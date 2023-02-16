@@ -35,6 +35,11 @@ import { EditRule } from '../Rules/containers/EditRule/EditRule';
 import { ImportRule } from '../Rules/containers/ImportRule/ImportRule';
 import { DuplicateRule } from '../Rules/containers/DuplicateRule/DuplicateRule';
 import { DateTimeFilter } from '../Overview/models/interfaces';
+import { Ueba } from '../Ueba/containers/Ueba/Ueba';
+import { ViewAggregators } from '../Ueba/containers/ViewAggregators/ViewAggregators';
+import { ViewInferences } from '../Ueba/containers/ViewInferences/ViewInferences';
+import { CreateInference } from '../Ueba/containers/CreateInference/CreateInference';
+import { CreateAggregator } from '../Ueba/containers/CreateAggregator/CreateAggregator';
 
 enum Navigation {
   SecurityAnalytics = 'Security Analytics',
@@ -43,6 +48,7 @@ enum Navigation {
   Rules = 'Rules',
   Overview = 'Overview',
   Alerts = 'Alerts',
+  Ueba = 'UEBA',
 }
 
 /**
@@ -76,6 +82,7 @@ const navItemIndexByRoute: { [route: string]: number } = {
   [ROUTES.ALERTS]: 3,
   [ROUTES.DETECTORS]: 4,
   [ROUTES.RULES]: 5,
+  [ROUTES.UEBA]: 6,
 };
 
 export default class Main extends Component<MainProps, MainState> {
@@ -210,6 +217,15 @@ export default class Main extends Component<MainProps, MainState> {
               history.push(ROUTES.RULES);
             },
             isSelected: this.state.selectedNavItemIndex === 5,
+          },
+          {
+            name: Navigation.Ueba,
+            id: 6,
+            onClick: () => {
+              this.setState({ selectedNavItemIndex: 6 });
+              history.push(ROUTES.UEBA);
+            },
+            isSelected: this.state.selectedNavItemIndex === 6,
           },
         ],
       },
@@ -404,6 +420,62 @@ export default class Main extends Component<MainProps, MainState> {
                               notificationsService={services.notificationsService}
                               notifications={core?.notifications}
                               opensearchService={services.opensearchService}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA}`}
+                          exact={true}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <Ueba
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA_VIEW_AGGREGATORS}`}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <ViewAggregators
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA_VIEW_INFERENCES}`}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <ViewInferences
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA_CREATE_INFERENCE}`}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <CreateInference
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA_CREATE_AGGREGATOR}`}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <CreateAggregator
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
                             />
                           )}
                         />

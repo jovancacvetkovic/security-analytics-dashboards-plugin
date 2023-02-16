@@ -12,6 +12,7 @@ import {
   NotificationsService,
   ServicesContext,
   IndexPatternsService,
+  UebaService,
 } from './services';
 import { DarkModeContext } from './components/DarkMode';
 import Main from './pages/Main';
@@ -43,6 +44,7 @@ export function renderApp(
   const ruleService = new RuleService(http);
   const notificationsService = new NotificationsService(http);
   const indexPatternsService = new IndexPatternsService(depsStart.data.indexPatterns);
+  const uebaService = new UebaService(http);
 
   const services: BrowserServices = {
     detectorsService,
@@ -54,6 +56,7 @@ export function renderApp(
     alertService: alertsService,
     notificationsService,
     indexPatternsService,
+    uebaService,
   };
 
   const isDarkMode = coreStart.uiSettings.get('theme:darkMode') || false;

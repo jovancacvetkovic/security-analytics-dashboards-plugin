@@ -13,6 +13,7 @@ import RuleService from './RuleService';
 import IndexService from './IndexService';
 import NotificationsService from './NotificationsService';
 import IndexPatternsService from './IndexPatternsService';
+import UebaService from './UebaService';
 
 export {
   ServicesConsumer,
@@ -26,4 +27,5 @@ export {
   IndexService,
   NotificationsService,
   IndexPatternsService,
+  UebaService,
 };

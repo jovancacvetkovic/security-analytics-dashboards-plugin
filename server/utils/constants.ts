@@ -27,6 +27,7 @@ export const API: SecurityAnalyticsApi = {
   CHANNELS: `${BASE_API_PATH}/_notifications/channels`,
   PLUGINS: `${BASE_API_PATH}/_notifications/plugins`,
   ACKNOWLEDGE_ALERTS: `${BASE_API_PATH}/detectors/{detector_id}/_acknowledge/alerts`,
+  UEBA_BASE: `${BASE_API_PATH}/ueba`,
 };
 
 /**
@@ -65,6 +66,8 @@ export const METHOD_NAMES = {
   // Notifications methods
   GET_CHANNEl: 'getChannel',
   GET_CHANNElS: 'getChannels',
+
+  GET_AGGREGATORS: 'getAggregators',
 };
 
 /**
@@ -103,4 +106,8 @@ export const CLIENT_ALERTS_METHODS = {
 export const CLIENT_NOTIFICATIONS_METHODS = {
   GET_CHANNEL: `${PLUGIN_PROPERTY_NAME}.${METHOD_NAMES.GET_CHANNEl}`,
   GET_CHANNELS: `${PLUGIN_PROPERTY_NAME}.${METHOD_NAMES.GET_CHANNElS}`,
+};
+
+export const CLIENT_UEBA_METHODS = {
+  GET_AGGREGATORS: `${PLUGIN_PROPERTY_NAME}.${METHOD_NAMES.GET_CHANNEl}`,
 };

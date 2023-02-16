@@ -15,6 +15,7 @@ import {
   setupIndexRoutes,
   setupAlertsRoutes,
   setupNotificationsRoutes,
+  setupUebaRoutes,
 } from './routes';
 import { setupRulesRoutes } from './routes/RuleRoutes';
 import {
@@ -26,6 +27,7 @@ import {
   AlertService,
   RulesService,
   NotificationsService,
+  UebaService,
 } from './services';
 
 export class SecurityAnalyticsPlugin
@@ -44,6 +46,7 @@ export class SecurityAnalyticsPlugin
       alertService: new AlertService(osDriver),
       rulesService: new RulesService(osDriver),
       notificationsService: new NotificationsService(osDriver),
+      uebaServices: new UebaService(osDriver),
     };
 
     // Create router
@@ -58,6 +61,7 @@ export class SecurityAnalyticsPlugin
     setupAlertsRoutes(services, router);
     setupRulesRoutes(services, router);
     setupNotificationsRoutes(services, router);
+    setupUebaRoutes(services, router);
 
     return {};
   }
