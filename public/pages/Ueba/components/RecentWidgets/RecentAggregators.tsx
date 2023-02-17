@@ -26,8 +26,8 @@ export const RecentAggregators: React.FC<AggregatorsProps> = ({
   loading = false,
   openFlyout,
   notifications,
+  services,
 }) => {
-  const services = useContext(ServicesContext);
   const uebaViewModelActor = services && new UebaViewModelActor(services, notifications);
 
   const [aggregatorItems, setAggregatorItems] = useState<AggregatorItem[]>([]);

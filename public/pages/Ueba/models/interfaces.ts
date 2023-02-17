@@ -15,3 +15,13 @@ export interface InferenceItem {
   schedule: any;
   aggregators: string[];
 }
+
+export interface DocumentItemProps {
+  id?: string;
+  name: string;
+  inference_model: string;
+}
+
+export interface DocumentItem<T> extends DocumentItemProps {
+  [key: string]: any;
+}

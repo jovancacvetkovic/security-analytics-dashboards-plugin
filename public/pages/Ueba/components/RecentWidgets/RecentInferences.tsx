@@ -11,14 +11,24 @@ import { WidgetContainer } from '../../../Overview/components/Widgets/WidgetCont
 import { TableWidget } from '../../../Overview/components/Widgets/TableWidget';
 import { InferenceItem } from '../../models/interfaces';
 import { ServicesContext } from '../../../../services';
+import { UebaViewModelActor } from '../../models/UebaViewModelActor';
+import { BrowserServices } from '../../../../models/interfaces';
 
 export interface InferenceProps {
   loading?: boolean;
   openFlyout: Function;
+  services: BrowserServices;
+  notifications: NotificationsStart;
 }
 
-export const RecentInferences: React.FC<InferenceProps> = ({ loading = false, openFlyout }) => {
-  const services = useContext(ServicesContext);
+export const RecentInferences: React.FC<InferenceProps> = ({
+  loading = false,
+  openFlyout,
+  services,
+  notifications,
+}) => {
+  const uebaViewModelActor = services && new UebaViewModelActor(services, notifications);
+
   const [inferenceItems, setInferenceItems] = useState<InferenceItem[]>([]);
 
   const actions = React.useMemo(
@@ -72,10 +82,8 @@ export const RecentInferences: React.FC<InferenceProps> = ({ loading = false, op
   ];
 
   const getInferences = useCallback(async () => {
-    const inferencesResponse = await services?.uebaService.getInferences();
-    if (inferencesResponse?.ok) {
-      setInferenceItems(inferencesResponse?.response.hits.hits);
-    }
+    const inferences = await uebaViewModelActor?.getInferences();
+    inferences && setInferenceItems(inferences);
   }, [services]);
 
   useEffect(() => {

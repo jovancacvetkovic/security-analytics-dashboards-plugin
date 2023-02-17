@@ -25,4 +25,12 @@ export function setupUebaRoutes(services: NodeServices, router: IRouter) {
     },
     uebaServices.getInferences
   );
+
+  router.get(
+    {
+      path: `${API.UEBA_BASE}/documents`,
+      validate: {},
+    },
+    uebaServices.getDocuments
+  );
 }

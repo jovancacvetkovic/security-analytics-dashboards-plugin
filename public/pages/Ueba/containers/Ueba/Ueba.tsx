@@ -32,10 +32,12 @@ import { getUebaVisualization } from '../../utils/helpers';
 import { AggregatorFlyout } from '../ViewAggregators/AggregatorFlyout';
 import { InferenceFlyout } from '../ViewInferences/InferenceFlyout';
 import { AggregatorItem, InferenceItem } from '../../models/interfaces';
+import { UebaViewModelActor } from '../../models/UebaViewModelActor';
+import _ from 'lodash';
 
 export interface UebaProps {
   services: BrowserServices;
-  notifications?: NotificationsStart;
+  notifications: NotificationsStart;
   history: H.History;
   setDateTimeFilter?: Function;
   dateTimeFilter?: DateTimeFilter;
@@ -54,6 +56,7 @@ export const Ueba: React.FC<UebaProps> = (props) => {
     services,
     notifications,
   } = props;
+  const uebaViewModelActor = services && new UebaViewModelActor(services, notifications);
 
   const context = useContext(CoreServicesContext);
 
@@ -71,8 +74,8 @@ export const Ueba: React.FC<UebaProps> = (props) => {
 
   const columns: EuiBasicTableColumn<DocumentsItem>[] = [
     {
-      field: 'id',
-      name: 'ID',
+      field: 'name',
+      name: 'Document',
       sortable: true,
       align: 'left',
     },
@@ -89,6 +92,20 @@ export const Ueba: React.FC<UebaProps> = (props) => {
       align: 'left',
     },
   ];
+
+  const getDocuments = useCallback(async () => {
+    let documents = await uebaViewModelActor?.getDocuments();
+    if (documents?.length) {
+      documents.forEach((doc) => {
+        const inferenceType = doc.inference_model;
+        doc.score = doc[`${inferenceType}_inference`].score;
+      });
+      setDocuments(documents);
+
+      renderVisualization(getUebaVisualization(documents), 'ueba-view');
+    }
+    setLoading(false);
+  }, [services]);
 
   const inferenceModels: any = [];
 
@@ -123,9 +140,8 @@ export const Ueba: React.FC<UebaProps> = (props) => {
 
   useEffect(() => {
     context?.chrome.setBreadcrumbs([BREADCRUMBS.SECURITY_ANALYTICS, BREADCRUMBS.UEBA]);
-    renderVisualization(getUebaVisualization([], ''), 'ueba-view');
-    setLoading(false);
-  });
+    getDocuments();
+  }, [getDocuments]);
 
   const onTimeChange = async ({ start, end }: { start: string; end: string }) => {
     let usedRanges = recentlyUsedRanges.filter(
@@ -219,7 +235,12 @@ export const Ueba: React.FC<UebaProps> = (props) => {
               services={services}
               notifications={notifications}
             />
-            <RecentInferences loading={loading} openFlyout={openInferenceFlyout} />
+            <RecentInferences
+              loading={loading}
+              openFlyout={openInferenceFlyout}
+              services={services}
+              notifications={notifications}
+            />
           </EuiFlexGrid>
         </EuiFlexItem>
       </EuiFlexGroup>

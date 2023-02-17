@@ -1,5 +1,6 @@
 import {
   addInteractiveLegends,
+  alertsDefaultColor,
   DateOpts,
   defaultDateFormat,
   defaultScaleDomain,
@@ -12,21 +13,9 @@ import {
 
 import { euiPaletteColorBlind, euiPaletteForStatus } from '@elastic/eui';
 
-export function getUebaVisualization(
-  visualizationData: any[],
-  groupBy: string,
-  dateOpts: DateOpts = {
-    timeUnit: defaultTimeUnit,
-    dateFormat: defaultDateFormat,
-    domain: defaultScaleDomain,
-  }
-) {
-  const severities = ['info', 'low', 'medium', 'high', 'critical'];
-  const isGroupedByLogType = groupBy === 'logType';
-  const logTitle = 'Log type';
-  const severityTitle = 'Rule severity';
-  const title = isGroupedByLogType ? logTitle : severityTitle;
-  return getVisualizationSpec('Findings data overview', visualizationData, [
+export function getUebaVisualization(visualizationData: any[]) {
+  console.log(visualizationData);
+  return getVisualizationSpec('Docs data overview', visualizationData, [
     addInteractiveLegends({
       mark: {
         type: 'bar',
@@ -34,24 +23,74 @@ export function getUebaVisualization(
       },
       encoding: {
         tooltip: [
-          getYAxis('finding', 'Findings'),
-          getTimeTooltip(dateOpts),
           {
-            field: groupBy,
-            title: title,
+            field: 'score',
+            title: 'Score',
           },
         ],
-        x: getXAxis(dateOpts),
-        y: getYAxis('finding', 'Count'),
-        color: {
-          field: groupBy,
-          title: title,
+        x: {
+          field: 'inference_model',
+          title: 'Inference',
+        },
+        y: {
+          type: 'quantitative',
+          field: 'score',
+          title: 'Score',
           scale: {
-            domain: isGroupedByLogType ? undefined : severities,
-            range: groupBy === 'logType' ? euiPaletteColorBlind() : euiPaletteForStatus(5),
+            domainMax: 1,
+            domainMin: 0,
+          },
+        },
+        color: {
+          field: 'score',
+          title: 'Inference score',
+          scale: {
+            range: ['#e7ba52', '#c7c7c7', '#aec7e8', '#1f77b4', '#9467bd'],
           },
         },
       },
     }),
+    /*{
+      data: {
+        values: [{}],
+      },
+      encoding: {
+        y: { datum: 0.5 },
+      },
+      layer: [
+        {
+          mark: 'rule',
+          encoding: {
+            y: {
+              field: 'score',
+            },
+            color: { value: 'red' },
+            size: { value: 1 },
+          },
+        },
+        {
+          mark: {
+            type: 'text',
+            align: 'top',
+            baseline: 'middle',
+            // dx: -2,
+            // dy: -2,
+            x: 'width',
+            text: 'hazardous',
+          },
+        },
+      ],
+    },
+    {
+      mark: {
+        type: 'text',
+      },
+      encoding: {
+        text: { field: 'score' },
+        color: {
+          value: 'white',
+        },
+      },
+    },*/
   ]);
 }

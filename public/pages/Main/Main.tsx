@@ -48,7 +48,7 @@ enum Navigation {
   Rules = 'Rules',
   Overview = 'Overview',
   Alerts = 'Alerts',
-  Ueba = 'UEBA',
+  Ueba = 'Ueba',
 }
 
 /**

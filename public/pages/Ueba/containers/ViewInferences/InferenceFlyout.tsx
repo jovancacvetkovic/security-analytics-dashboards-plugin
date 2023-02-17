@@ -28,7 +28,7 @@ export const InferenceFlyout: React.FC<InferenceFlyoutProps> = ({ inference, hid
       onClose={hideFlyout}
       ownFocus={true}
       hideCloseButton
-      size={'m'}
+      size={'s'}
       data-test-subj={`inference_flyout_${inference.name}`}
     >
       <EuiFlyoutHeader hasBorder={true}>

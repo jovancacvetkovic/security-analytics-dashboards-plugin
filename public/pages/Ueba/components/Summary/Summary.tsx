@@ -6,8 +6,7 @@ import { WidgetContainer } from '../../../Overview/components/Widgets/WidgetCont
 export interface SummaryProps {
   loading: boolean;
 }
-export const Summary: React.FC<SummaryProps> = () => {
-  const [loading, setLoading] = useState(true);
+export const Summary: React.FC<SummaryProps> = ({ loading = true }) => {
   return (
     <WidgetContainer title="User entity behavior analytics" actions={[]}>
       <EuiFlexItem>

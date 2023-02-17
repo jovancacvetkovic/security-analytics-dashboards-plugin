@@ -5,7 +5,7 @@
 
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { errorNotificationToast } from '../../../utils/helpers';
-import { AggregatorItem } from './interfaces';
+import { AggregatorItem, DocumentItem, InferenceItem } from './interfaces';
 import { BrowserServices } from '../../../models/interfaces';
 
 export interface UebaViewModel {
@@ -34,6 +34,40 @@ export class UebaViewModelActor {
       return [];
     } catch (error: any) {
       errorNotificationToast(this.notifications, 'retrieve', 'ueba aggregators', error);
+      return [];
+    }
+  }
+
+  public async getInferences(pageSize: number = 10): Promise<InferenceItem[]> {
+    try {
+      const response = await this.services.uebaService.getInferences(pageSize);
+
+      if (response.ok) {
+        return response?.response.hits.hits;
+      } else {
+        errorNotificationToast(this.notifications, 'retrieve', 'ueba inferences', response.error);
+      }
+
+      return [];
+    } catch (error: any) {
+      errorNotificationToast(this.notifications, 'retrieve', 'ueba inferences', error);
+      return [];
+    }
+  }
+
+  public async getDocuments(pageSize: number = 10): Promise<DocumentItem<any>[]> {
+    try {
+      const response = await this.services.uebaService.getDocuments(pageSize);
+
+      if (response.ok) {
+        return response?.response.hits.hits;
+      } else {
+        errorNotificationToast(this.notifications, 'retrieve', 'ueba documents', response.error);
+      }
+
+      return [];
+    } catch (error: any) {
+      errorNotificationToast(this.notifications, 'retrieve', 'ueba documents', error);
       return [];
     }
   }
