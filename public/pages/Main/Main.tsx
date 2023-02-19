@@ -36,10 +36,8 @@ import { ImportRule } from '../Rules/containers/ImportRule/ImportRule';
 import { DuplicateRule } from '../Rules/containers/DuplicateRule/DuplicateRule';
 import { DateTimeFilter } from '../Overview/models/interfaces';
 import { Ueba } from '../Ueba/containers/Ueba/Ueba';
-import { ViewAggregators } from '../Ueba/containers/ViewAggregators/ViewAggregators';
-import { ViewInferences } from '../Ueba/containers/ViewInferences/ViewInferences';
-import { CreateInference } from '../Ueba/containers/CreateInference/CreateInference';
 import { CreateAggregator } from '../Ueba/containers/CreateAggregator/CreateAggregator';
+import { CreateAggregationQuery } from '../Ueba/containers/CreateAggregationQuery/CreateAggregationQuery';
 
 enum Navigation {
   SecurityAnalytics = 'Security Analytics',
@@ -436,31 +434,32 @@ export default class Main extends Component<MainProps, MainState> {
                           )}
                         />
                         <Route
+                          path={`${ROUTES.UEBA_VIEW_INFERENCES}`}
+                          exact={true}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <Ueba
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <Ueba
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
                           path={`${ROUTES.UEBA_VIEW_AGGREGATORS}`}
                           render={(props: RouteComponentProps<any, any, any>) => (
-                            <ViewAggregators
-                              {...props}
-                              services={services}
-                              history={props.history}
-                              notifications={core?.notifications}
-                            />
-                          )}
-                        />
-                        <Route
-                          path={`${ROUTES.UEBA_VIEW_INFERENCES}`}
-                          render={(props: RouteComponentProps<any, any, any>) => (
-                            <ViewInferences
-                              {...props}
-                              services={services}
-                              history={props.history}
-                              notifications={core?.notifications}
-                            />
-                          )}
-                        />
-                        <Route
-                          path={`${ROUTES.UEBA_CREATE_INFERENCE}`}
-                          render={(props: RouteComponentProps<any, any, any>) => (
-                            <CreateInference
+                            <Ueba
                               {...props}
                               services={services}
                               history={props.history}
@@ -472,6 +471,17 @@ export default class Main extends Component<MainProps, MainState> {
                           path={`${ROUTES.UEBA_CREATE_AGGREGATOR}`}
                           render={(props: RouteComponentProps<any, any, any>) => (
                             <CreateAggregator
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <CreateAggregationQuery
                               {...props}
                               services={services}
                               history={props.history}

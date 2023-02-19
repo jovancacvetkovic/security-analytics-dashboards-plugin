@@ -12,7 +12,7 @@ export interface UebaProps {
   history: H.History;
 }
 
-export const ViewAggregators: React.FC<UebaProps> = (props) => {
+export const Aggregators: React.FC<UebaProps> = (props) => {
   const context = useContext(CoreServicesContext);
   useEffect(() => {
     context?.chrome.setBreadcrumbs([
@@ -21,5 +21,6 @@ export const ViewAggregators: React.FC<UebaProps> = (props) => {
       BREADCRUMBS.UEBA_VIEW_AGGREGATORS,
     ]);
   });
+
   return <>View aggregators</>;
 };

@@ -12,15 +12,14 @@ export interface UebaProps {
   history: H.History;
 }
 
-export const ViewInferences: React.FC<UebaProps> = (props) => {
+export const AggregationQueries: React.FC<UebaProps> = (props) => {
   const context = useContext(CoreServicesContext);
   useEffect(() => {
     context?.chrome.setBreadcrumbs([
       BREADCRUMBS.SECURITY_ANALYTICS,
       BREADCRUMBS.UEBA,
-      BREADCRUMBS.UEBA_VIEW_INFERENCES,
+      BREADCRUMBS.UEBA_VIEW_AGGREGATION_QUERIES,
     ]);
   });
-
-  return <>View inferences</>;
+  return <>View aggregation queries</>;
 };

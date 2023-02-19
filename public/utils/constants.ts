@@ -25,7 +25,6 @@ export const ROUTES = Object.freeze({
   FINDINGS: '/findings',
   OVERVIEW: '/overview',
   RULES: '/rules',
-  UEBA: '/ueba',
   RULES_CREATE: '/create-rule',
   RULES_EDIT: '/edit-rule',
   RULES_IMPORT: '/import-rule',
@@ -36,10 +35,12 @@ export const ROUTES = Object.freeze({
   EDIT_DETECTOR_RULES: '/edit-detector-rules',
   EDIT_FIELD_MAPPINGS: '/edit-field-mappings',
   EDIT_DETECTOR_ALERT_TRIGGERS: '/edit-alert-triggers',
+  UEBA: '/ueba',
+  UEBA_CREATE_AGGREGATION_QUERY: '/ueba/create-aggregation_query',
   UEBA_CREATE_AGGREGATOR: '/ueba/create-aggregator',
-  UEBA_CREATE_INFERENCE: '/ueba/create-inference-model',
-  UEBA_VIEW_AGGREGATORS: '/ueba/view-aggregators',
-  UEBA_VIEW_INFERENCES: '/ueba/view-inference-models',
+  UEBA_VIEW_AGGREGATORS: '/ueba/aggregators',
+  UEBA_VIEW_AGGREGATION_QUERIES: '/ueba/aggregation-queries',
+  UEBA_VIEW_INFERENCES: '/ueba/inferences',
 
   get LANDING_PAGE(): string {
     return this.OVERVIEW;
@@ -71,17 +72,21 @@ export const BREADCRUMBS = Object.freeze({
   RULES_DUPLICATE: { text: 'Duplicate rule', href: `#${ROUTES.RULES_DUPLICATE}` },
   RULES_IMPORT: { text: 'Import rule', href: `#${ROUTES.RULES_IMPORT}` },
   UEBA: { text: 'UEBA', href: `#${ROUTES.UEBA}` },
-  UEBA_CREATE_AGGREGATOR: {
+  UEBA_CREATE_AGGREGATION_QUERY: {
     text: 'Create UEBA aggregator',
-    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATOR}`,
+    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`,
   },
-  UEBA_CREATE_INFERENCE: {
+  UEBA_CREATE_AGGREGATOR: {
     text: 'Create UEBA inference model',
-    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_INFERENCE}`,
+    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATOR}`,
   },
   UEBA_VIEW_AGGREGATORS: {
     text: 'View aggregators',
     href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_AGGREGATORS}`,
+  },
+  UEBA_VIEW_AGGREGATION_QUERIES: {
+    text: 'View aggregation queries',
+    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`,
   },
   UEBA_VIEW_INFERENCES: {
     text: 'View inference models',

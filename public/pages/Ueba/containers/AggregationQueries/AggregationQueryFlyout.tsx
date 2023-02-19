@@ -24,7 +24,10 @@ export interface AggregatorFlyoutProps {
   hideFlyout: () => void;
 }
 
-export const AggregatorFlyout: React.FC<AggregatorFlyoutProps> = ({ aggregator, hideFlyout }) => {
+export const AggregationQueryFlyout: React.FC<AggregatorFlyoutProps> = ({
+  aggregator,
+  hideFlyout,
+}) => {
   return (
     <EuiFlyout
       onClose={hideFlyout}

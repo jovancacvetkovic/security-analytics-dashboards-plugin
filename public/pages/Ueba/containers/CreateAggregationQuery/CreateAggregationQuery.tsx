@@ -12,15 +12,15 @@ export interface UebaProps {
   history: H.History;
 }
 
-export const CreateInference: React.FC<UebaProps> = (props) => {
+export const CreateAggregationQuery: React.FC<UebaProps> = (props) => {
   const context = useContext(CoreServicesContext);
   useEffect(() => {
     context?.chrome.setBreadcrumbs([
       BREADCRUMBS.SECURITY_ANALYTICS,
       BREADCRUMBS.UEBA,
-      BREADCRUMBS.UEBA_CREATE_INFERENCE,
+      BREADCRUMBS.UEBA_CREATE_AGGREGATION_QUERY,
     ]);
   });
 
-  return <>Create inference</>;
+  return <>Create aggregation query</>;
 };
