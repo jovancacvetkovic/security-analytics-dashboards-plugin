@@ -132,8 +132,8 @@ export const Inferences: React.FC<UebaProps> = (props) => {
 
   const actions = React.useMemo(
     () => [
-      <EuiButton href={`#${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`}>Create Aggregator</EuiButton>,
-      <EuiButton href={`#${ROUTES.UEBA_CREATE_AGGREGATOR}`}>Create inference</EuiButton>,
+      <EuiButton href={`#${ROUTES}`}>View document details</EuiButton>,
+      <EuiButton>Acknowledge</EuiButton>,
     ],
     []
   );
@@ -227,21 +227,6 @@ export const Inferences: React.FC<UebaProps> = (props) => {
               search={getTableSearchConfig()}
             />
           </WidgetContainer>
-          <EuiSpacer size={'m'} />
-          <EuiFlexGrid columns={2} gutterSize="m">
-            <RecentAggregators
-              loading={loading}
-              openFlyout={openAggregatorFlyout}
-              services={services}
-              notifications={notifications}
-            />
-            <RecentInferences
-              loading={loading}
-              openFlyout={openInferenceFlyout}
-              services={services}
-              notifications={notifications}
-            />
-          </EuiFlexGrid>
         </EuiFlexItem>
       </EuiFlexGroup>
     </>

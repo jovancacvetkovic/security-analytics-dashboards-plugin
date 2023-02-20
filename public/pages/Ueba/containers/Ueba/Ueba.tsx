@@ -6,7 +6,6 @@ import { BrowserServices } from '../../../../models/interfaces';
 import { ROUTES } from '../../../../utils/constants';
 import * as H from 'history';
 import { DateTimeFilter } from '../../../Overview/models/interfaces';
-import _ from 'lodash';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Inferences } from './Inferences';
 import { Aggregators } from '../Aggregators/Aggregators';
@@ -24,8 +23,14 @@ export interface DocumentsItem {
   id?: string;
 }
 
+interface TabRoute {
+  id: string;
+  name: string;
+  route: string;
+}
+
 export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) => {
-  const tabs = [
+  const tabs: TabRoute[] = [
     {
       id: 'inferences',
       name: 'Inferences',
@@ -42,7 +47,11 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
       route: ROUTES.UEBA_VIEW_AGGREGATION_QUERIES,
     },
   ];
-  const [selectedTabId, setSelectedTabId] = useState<string>('inferences');
+
+  const pathname = history.location.pathname;
+  const initialTab = tabs.filter((tab) => tab.route === pathname);
+  const initialRoute = initialTab[0] ? initialTab[0].id : 'inference';
+  const [selectedTabId, setSelectedTabId] = useState<string>(initialRoute);
 
   const onSelectedTabChanged = (id: string, route: string) => {
     setSelectedTabId(id);
@@ -53,7 +62,7 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
     }
   };
 
-  const renderTab = (tab) => (
+  const renderTab = (tab: TabRoute) => (
     <EuiTab
       onClick={() => onSelectedTabChanged(tab.id, tab.route)}
       isSelected={tab.id === selectedTabId}
