@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { ISavedObjectsService } from '../../types';
 import {
   DetectorsService,
   FindingsService,
@@ -25,6 +26,7 @@ export interface BrowserServices {
   alertService: AlertsService;
   ruleService: RuleService;
   notificationsService: NotificationsService;
+  savedObjectsService: ISavedObjectsService;
   indexPatternsService: IndexPatternsService;
   uebaService: UebaService;
 }

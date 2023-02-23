@@ -30,6 +30,7 @@ export interface SecurityAnalyticsApi {
   readonly PLUGINS: string;
   readonly ACKNOWLEDGE_ALERTS: string;
   readonly UEBA_BASE: string;
+  readonly UPDATE_ALIASES: string;
 }
 
 export interface NodeServices {

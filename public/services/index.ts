@@ -14,6 +14,7 @@ import IndexService from './IndexService';
 import NotificationsService from './NotificationsService';
 import IndexPatternsService from './IndexPatternsService';
 import UebaService from './UebaService';
+import SavedObjectService from './SavedObjectService';
 
 export {
   ServicesConsumer,
@@ -28,4 +29,5 @@ export {
   NotificationsService,
   IndexPatternsService,
   UebaService,
+  SavedObjectService,
 };
