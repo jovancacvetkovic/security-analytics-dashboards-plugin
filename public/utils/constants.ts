@@ -75,11 +75,11 @@ export const BREADCRUMBS = Object.freeze({
   RULES_IMPORT: { text: 'Import rule', href: `#${ROUTES.RULES_IMPORT}` },
   UEBA: { text: 'UEBA', href: `#${ROUTES.UEBA}` },
   UEBA_CREATE_AGGREGATION_QUERY: {
-    text: 'Create UEBA aggregator',
+    text: 'Create aggregation query',
     href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`,
   },
   UEBA_CREATE_AGGREGATOR: {
-    text: 'Create UEBA inference model',
+    text: 'Create aggregator',
     href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATOR}`,
   },
   UEBA_VIEW_AGGREGATORS: {
