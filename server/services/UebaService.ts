@@ -1,4 +1,5 @@
-/*
+/*  GetInferencesResponse,
+
  * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -13,9 +14,9 @@ import {
 } from 'opensearch-dashboards/server';
 import { ServerResponse } from '../models/types';
 import {
+  GetAggregationQueriesResponse,
   GetAggregatorsResponse,
   GetDocumentsResponse,
-  GetInferencesResponse,
 } from '../models/interfaces/Ueba';
 
 export default class UebaService {
@@ -25,28 +26,28 @@ export default class UebaService {
     this.osDriver = osDriver;
   }
 
-  getAggregators = async (
+  getAggregationQueries = async (
     _context: RequestHandlerContext,
     request: OpenSearchDashboardsRequest<{}>,
     response: OpenSearchDashboardsResponseFactory
   ): Promise<
-    IOpenSearchDashboardsResponse<ServerResponse<GetAggregatorsResponse> | ResponseError>
+    IOpenSearchDashboardsResponse<ServerResponse<GetAggregationQueriesResponse> | ResponseError>
   > => {
     try {
       // const { callAsCurrentUser: callWithRequest } = this.osDriver.asScoped(request);
-      // const getAggregatorsResponse: GetRulesResponse = await callWithRequest(
+      // const getAggregationQueriesResponse: GetRulesResponse = await callWithRequest(
       //   CLIENT_UEBA_METHODS.GET_AGGREGATORS
       // );
 
-      const getAggregatorsResponse: GetAggregatorsResponse = {
+      const getAggregationQueriesResponse: GetAggregationQueriesResponse = {
         hits: {
           hits: [
             {
-              name: 'Aggregator 1',
-              description: 'This is a aggregator description.',
+              name: 'Aggregator query I',
+              description: 'This is a aggregation query description.',
               source_index: 'cypress-dns-index',
               page_size: 10,
-              aggregator_script:
+              aggregation_script:
                 '{\n' +
                 '  "query": {\n' +
                 '    "match_all": {}\n' +
@@ -86,11 +87,11 @@ export default class UebaService {
         statusCode: 200,
         body: {
           ok: true,
-          response: getAggregatorsResponse,
+          response: getAggregationQueriesResponse,
         },
       });
     } catch (error: any) {
-      console.error('Security Analytics - UebaServices - getAggregators:', error);
+      console.error('Security Analytics - UebaServices - getAggregationQueries:', error);
       return response.custom({
         statusCode: 200,
         body: {
@@ -101,12 +102,12 @@ export default class UebaService {
     }
   };
 
-  getInferences = async (
+  getAggregators = async (
     _context: RequestHandlerContext,
     request: OpenSearchDashboardsRequest<{}>,
     response: OpenSearchDashboardsResponseFactory
   ): Promise<
-    IOpenSearchDashboardsResponse<ServerResponse<GetInferencesResponse> | ResponseError>
+    IOpenSearchDashboardsResponse<ServerResponse<GetAggregatorsResponse> | ResponseError>
   > => {
     try {
       // const { callAsCurrentUser: callWithRequest } = this.osDriver.asScoped(request);
@@ -114,15 +115,15 @@ export default class UebaService {
       //   CLIENT_UEBA_METHODS.GET_AGGREGATORS
       // );
 
-      const getInferencesResponse: GetInferencesResponse = {
+      const getAggregatorsResponse: GetAggregatorsResponse = {
         hits: {
           hits: [
             {
-              name: 'Inference model I',
+              name: 'Aggregator I',
               description: 'Any text can go here.',
               type: 'itt',
               schedule: {},
-              aggregators: ['Aggregator 1'],
+              aggregators: ['Aggregator model itt'],
             },
           ],
           total: {
@@ -136,11 +137,11 @@ export default class UebaService {
         statusCode: 200,
         body: {
           ok: true,
-          response: getInferencesResponse,
+          response: getAggregatorsResponse,
         },
       });
     } catch (error: any) {
-      console.error('Security Analytics - UebaServices - getInferences:', error);
+      console.error('Security Analytics - UebaServices - getAggregators:', error);
       return response.custom({
         statusCode: 200,
         body: {

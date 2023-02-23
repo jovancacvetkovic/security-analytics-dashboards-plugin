@@ -4,10 +4,8 @@ import {
   EuiFlexItem,
   EuiTitle,
   EuiSuperDatePicker,
-  EuiFlexGrid,
   EuiBasicTableColumn,
   EuiButton,
-  EuiSpacer,
 } from '@elastic/eui';
 
 import { NotificationsStart } from 'opensearch-dashboards/public';
@@ -22,18 +20,12 @@ import {
 import * as H from 'history';
 import { Summary } from '../../components/Summary/Summary';
 import { DateTimeFilter } from '../../../Overview/models/interfaces';
-import { getChartTimeUnit, TimeUnit } from '../../../Overview/utils/helpers';
-import { RecentAggregators } from '../../components/RecentWidgets/RecentAggregators';
-import { RecentInferences } from '../../components/RecentWidgets/RecentInferences';
+
 import { TableWidget } from '../../../Overview/components/Widgets/TableWidget';
 import { WidgetContainer } from '../../../Overview/components/Widgets/WidgetContainer';
 import { renderVisualization } from '../../../../utils/helpers';
 import { getUebaVisualization } from '../../utils/helpers';
-import { AggregationQueryFlyout } from '../AggregationQueries/AggregationQueryFlyout';
-import { InferenceFlyout } from '../Aggregators/InferenceFlyout';
-import { AggregatorItem, InferenceItem } from '../../models/interfaces';
 import { UebaViewModelActor } from '../../models/UebaViewModelActor';
-import _ from 'lodash';
 
 export interface UebaProps {
   services: BrowserServices;
@@ -60,17 +52,13 @@ export const Inferences: React.FC<UebaProps> = (props) => {
 
   const context = useContext(CoreServicesContext);
 
-  const [aggregator, setAggregator] = useState<AggregatorItem>();
-  const [inference, setInference] = useState<InferenceItem>();
-
   const [loading, setLoading] = useState<boolean>(true);
   const [recentlyUsedRanges, setRecentlyUsedRanges] = useState([DEFAULT_DATE_RANGE]);
 
-  const timeUnits = getChartTimeUnit(dateTimeFilter.startTime, dateTimeFilter.endTime);
-  const [timeUnit, setTimeUnit] = useState<TimeUnit>(timeUnits.timeUnit);
+  // const timeUnits = getChartTimeUnit(dateTimeFilter.startTime, dateTimeFilter.endTime);
+  // const [timeUnit, setTimeUnit] = useState<TimeUnit>(timeUnits.timeUnit);
 
   const [documents, setDocuments] = useState<DocumentsItem[]>([]);
-  const [inferences, setInferences] = useState<InferenceItem[]>([]);
 
   const columns: EuiBasicTableColumn<DocumentsItem>[] = [
     {
@@ -139,6 +127,14 @@ export const Inferences: React.FC<UebaProps> = (props) => {
   );
 
   useEffect(() => {
+    context?.chrome.setBreadcrumbs([
+      BREADCRUMBS.SECURITY_ANALYTICS,
+      BREADCRUMBS.UEBA,
+      BREADCRUMBS.UEBA_VIEW_INFERENCES,
+    ]);
+  });
+
+  useEffect(() => {
     context?.chrome.setBreadcrumbs([BREADCRUMBS.SECURITY_ANALYTICS, BREADCRUMBS.UEBA]);
     getDocuments();
   }, [getDocuments]);
@@ -147,19 +143,22 @@ export const Inferences: React.FC<UebaProps> = (props) => {
     let usedRanges = recentlyUsedRanges.filter(
       (range) => !(range.start === start && range.end === end)
     );
-    usedRanges.unshift({ start: start, end: end });
+    usedRanges.unshift({
+      start: start,
+      end: end,
+    });
     if (usedRanges.length > MAX_RECENTLY_USED_TIME_RANGES)
       usedRanges = usedRanges.slice(0, MAX_RECENTLY_USED_TIME_RANGES);
 
     const endTime = start === end ? DEFAULT_DATE_RANGE.end : end;
-    const timeUnits = getChartTimeUnit(start, endTime);
+    // const timeUnits = getChartTimeUnit(start, endTime);
 
     props.setDateTimeFilter &&
       props.setDateTimeFilter({
         startTime: start,
         endTime: endTime,
       });
-    setTimeUnit(timeUnits.timeUnit);
+    // setTimeUnit(timeUnits.timeUnit);
     setRecentlyUsedRanges(usedRanges);
   };
 
@@ -168,30 +167,8 @@ export const Inferences: React.FC<UebaProps> = (props) => {
     // await overviewViewModelActor.onRefresh(dateTimeFilter.startTime, dateTimeFilter.endTime);
   };
 
-  const openAggregatorFlyout = useCallback((aggregator: AggregatorItem) => {
-    setAggregator(aggregator);
-  }, []);
-
-  const openInferenceFlyout = useCallback((inference: InferenceItem) => {
-    setInference(inference);
-  }, []);
-
-  const hideAggregatorFlyout = useCallback(() => {
-    setAggregator(undefined);
-  }, []);
-
-  const hideInferenceFlyout = useCallback(() => {
-    setInference(undefined);
-  }, []);
-
   return (
     <>
-      {aggregator ? (
-        <AggregationQueryFlyout hideFlyout={hideAggregatorFlyout} aggregator={aggregator} />
-      ) : null}
-      {inference ? (
-        <InferenceFlyout hideFlyout={hideInferenceFlyout} inference={inference} />
-      ) : null}
       <EuiFlexGroup direction="column">
         <EuiFlexItem>
           <EuiFlexGroup justifyContent="spaceBetween">

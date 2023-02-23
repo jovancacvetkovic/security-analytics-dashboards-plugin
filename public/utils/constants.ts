@@ -83,15 +83,15 @@ export const BREADCRUMBS = Object.freeze({
     href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATOR}`,
   },
   UEBA_VIEW_AGGREGATORS: {
-    text: 'View aggregators',
+    text: 'Aggregators',
     href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_AGGREGATORS}`,
   },
   UEBA_VIEW_AGGREGATION_QUERIES: {
-    text: 'View aggregation queries',
+    text: 'Aggregation queries',
     href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`,
   },
   UEBA_VIEW_INFERENCES: {
-    text: 'View inference models',
+    text: 'Inferences',
     href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_INFERENCES}`,
   },
 });

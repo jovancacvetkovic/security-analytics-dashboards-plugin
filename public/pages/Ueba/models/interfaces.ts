@@ -1,13 +1,13 @@
-export interface AggregatorItem {
+export interface AggregationQueryItem {
   id?: string;
   name: string;
   description: string;
   source_index: string;
   page_size: number;
-  aggregator_script: string;
+  aggregation_script: string;
 }
 
-export interface InferenceItem {
+export interface AggregatorItem {
   id?: string;
   name: string;
   description: string;

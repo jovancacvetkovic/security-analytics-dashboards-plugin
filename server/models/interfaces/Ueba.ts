@@ -5,16 +5,17 @@
 
 import {
   AggregatorItem,
+  AggregationQueryItem,
   DocumentItem,
-  InferenceItem,
 } from '../../../public/pages/Ueba/models/interfaces';
 
 export interface GetAggregators {
   body: string;
 }
-export interface GetAggregatorsResponse {
+
+export interface GetAggregationQueriesResponse {
   hits: {
-    hits: AggregatorItem[];
+    hits: AggregationQueryItem[];
     total: {
       value: number;
     };
@@ -22,12 +23,9 @@ export interface GetAggregatorsResponse {
   };
 }
 
-export interface GetInferences {
-  body: string;
-}
-export interface GetInferencesResponse {
+export interface GetAggregatorsResponse {
   hits: {
-    hits: InferenceItem[];
+    hits: AggregatorItem[];
     total: {
       value: number;
     };

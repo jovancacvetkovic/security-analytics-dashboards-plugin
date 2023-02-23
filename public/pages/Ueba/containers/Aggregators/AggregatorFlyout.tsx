@@ -15,27 +15,27 @@ import {
   EuiText,
 } from '@elastic/eui';
 import React from 'react';
-import { InferenceItem } from '../../models/interfaces';
+import { AggregatorItem } from '../../models/interfaces';
 
-export interface InferenceFlyoutProps {
-  inference: InferenceItem;
+export interface AggregatorFlyoutProps {
+  aggregator: AggregatorItem;
   hideFlyout: () => void;
 }
 
-export const InferenceFlyout: React.FC<InferenceFlyoutProps> = ({ inference, hideFlyout }) => {
+export const AggregatorFlyout: React.FC<AggregatorFlyoutProps> = ({ aggregator, hideFlyout }) => {
   return (
     <EuiFlyout
       onClose={hideFlyout}
       ownFocus={true}
       hideCloseButton
       size={'s'}
-      data-test-subj={`inference_flyout_${inference.name}`}
+      data-test-subj={`aggregator_flyout_${aggregator.name}`}
     >
       <EuiFlyoutHeader hasBorder={true}>
         <EuiFlexGroup alignItems="center">
           <EuiFlexItem>
             <EuiTitle size="m">
-              <h3>Inference details</h3>
+              <h3>Aggregator details</h3>
             </EuiTitle>
           </EuiFlexItem>
           <EuiFlexItem grow={false}>
@@ -45,7 +45,7 @@ export const InferenceFlyout: React.FC<InferenceFlyoutProps> = ({ inference, hid
               display="empty"
               iconSize="m"
               onClick={() => hideFlyout()}
-              data-test-subj={`close-inference-details-flyout`}
+              data-test-subj={`close-aggregator-details-flyout`}
             />
           </EuiFlexItem>
         </EuiFlexGroup>
@@ -53,26 +53,26 @@ export const InferenceFlyout: React.FC<InferenceFlyoutProps> = ({ inference, hid
       <EuiFlyoutBody>
         <EuiFlexGroup justifyContent="flexEnd">
           <EuiFlexItem>
-            <EuiFormLabel>Inference name</EuiFormLabel>
-            <EuiText data-test-subj={'inference_flyout_name'}>{inference.name}</EuiText>
+            <EuiFormLabel>Aggregator name</EuiFormLabel>
+            <EuiText data-test-subj={'aggregator_flyout_name'}>{aggregator.name}</EuiText>
           </EuiFlexItem>
           <EuiFlexItem>
-            <EuiFormLabel>Inference type</EuiFormLabel>
-            <EuiText data-test-subj={'inference_flyout_type'}>{inference.type}</EuiText>
+            <EuiFormLabel>Aggregator type</EuiFormLabel>
+            <EuiText data-test-subj={'aggregator_flyout_type'}>{aggregator.type}</EuiText>
           </EuiFlexItem>
         </EuiFlexGroup>
 
         <EuiFlexGroup justifyContent="flexEnd">
           <EuiFlexItem>
             <EuiFormLabel>Description</EuiFormLabel>
-            <EuiText data-test-subj={'inference_flyout_description'}>
-              {inference.description}
+            <EuiText data-test-subj={'aggregator_flyout_description'}>
+              {aggregator.description}
             </EuiText>
           </EuiFlexItem>
           <EuiFlexItem>
             <EuiFormLabel>Schedule</EuiFormLabel>
-            <EuiText data-test-subj={'inference_flyout_schedule'}>
-              {JSON.stringify(inference.schedule)}
+            <EuiText data-test-subj={'aggregator_flyout_schedule'}>
+              {JSON.stringify(aggregator.schedule)}
             </EuiText>
           </EuiFlexItem>
         </EuiFlexGroup>

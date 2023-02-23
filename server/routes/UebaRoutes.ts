@@ -12,7 +12,7 @@ export function setupUebaRoutes(services: NodeServices, router: IRouter) {
 
   router.get(
     {
-      path: `${API.UEBA_BASE}/aggregator`,
+      path: `${API.UEBA_BASE}/aggregators`,
       validate: {},
     },
     uebaServices.getAggregators
@@ -20,10 +20,10 @@ export function setupUebaRoutes(services: NodeServices, router: IRouter) {
 
   router.get(
     {
-      path: `${API.UEBA_BASE}/inference`,
+      path: `${API.UEBA_BASE}/aggregation_queries`,
       validate: {},
     },
-    uebaServices.getInferences
+    uebaServices.getAggregationQueries
   );
 
   router.get(

@@ -17,15 +17,15 @@ import {
   EuiSpacer,
 } from '@elastic/eui';
 import React from 'react';
-import { AggregatorItem } from '../../models/interfaces';
+import { AggregationQueryItem } from '../../models/interfaces';
 
-export interface AggregatorFlyoutProps {
-  aggregator: AggregatorItem;
+export interface AggregationQueryFlyoutProps {
+  aggregationQuery: AggregationQueryItem;
   hideFlyout: () => void;
 }
 
-export const AggregationQueryFlyout: React.FC<AggregatorFlyoutProps> = ({
-  aggregator,
+export const AggregationQueryFlyout: React.FC<AggregationQueryFlyoutProps> = ({
+  aggregationQuery,
   hideFlyout,
 }) => {
   return (
@@ -34,13 +34,13 @@ export const AggregationQueryFlyout: React.FC<AggregatorFlyoutProps> = ({
       ownFocus={true}
       hideCloseButton
       size={'m'}
-      data-test-subj={`aggregator_flyout_${aggregator.name}`}
+      data-test-subj={`aggregationQuery_flyout_${aggregationQuery.name}`}
     >
       <EuiFlyoutHeader hasBorder={true}>
         <EuiFlexGroup alignItems="center">
           <EuiFlexItem>
             <EuiTitle size="m">
-              <h3>Aggregator details</h3>
+              <h3>Aggregation query details</h3>
             </EuiTitle>
           </EuiFlexItem>
           <EuiFlexItem grow={false}>
@@ -50,7 +50,7 @@ export const AggregationQueryFlyout: React.FC<AggregatorFlyoutProps> = ({
               display="empty"
               iconSize="m"
               onClick={() => hideFlyout()}
-              data-test-subj={`close-aggregator-details-flyout`}
+              data-test-subj={`close-aggregationQuery-details-flyout`}
             />
           </EuiFlexItem>
         </EuiFlexGroup>
@@ -58,13 +58,15 @@ export const AggregationQueryFlyout: React.FC<AggregatorFlyoutProps> = ({
       <EuiFlyoutBody>
         <EuiFlexGroup justifyContent="flexEnd">
           <EuiFlexItem>
-            <EuiFormLabel>Aggregator name</EuiFormLabel>
-            <EuiText data-test-subj={'aggregator_flyout_name'}>{aggregator.name}</EuiText>
+            <EuiFormLabel>Aggregation query name</EuiFormLabel>
+            <EuiText data-test-subj={'aggregationQuery_flyout_name'}>
+              {aggregationQuery.name}
+            </EuiText>
           </EuiFlexItem>
           <EuiFlexItem>
             <EuiFormLabel>Source index</EuiFormLabel>
-            <EuiText data-test-subj={'aggregator_flyout_source_index'}>
-              {aggregator.source_index}
+            <EuiText data-test-subj={'aggregationQuery_flyout_source_index'}>
+              {aggregationQuery.source_index}
             </EuiText>
           </EuiFlexItem>
         </EuiFlexGroup>
@@ -72,13 +74,15 @@ export const AggregationQueryFlyout: React.FC<AggregatorFlyoutProps> = ({
         <EuiFlexGroup justifyContent="flexEnd">
           <EuiFlexItem>
             <EuiFormLabel>Description</EuiFormLabel>
-            <EuiText data-test-subj={'aggregator_flyout_description'}>
-              {aggregator.description}
+            <EuiText data-test-subj={'aggregationQuery_flyout_description'}>
+              {aggregationQuery.description}
             </EuiText>
           </EuiFlexItem>
           <EuiFlexItem>
             <EuiFormLabel>Page size</EuiFormLabel>
-            <EuiText data-test-subj={'aggregator_flyout_page_size'}>{aggregator.page_size}</EuiText>
+            <EuiText data-test-subj={'aggregationQuery_flyout_page_size'}>
+              {aggregationQuery.page_size}
+            </EuiText>
           </EuiFlexItem>
         </EuiFlexGroup>
 
@@ -86,9 +90,9 @@ export const AggregationQueryFlyout: React.FC<AggregatorFlyoutProps> = ({
 
         <EuiFlexGroup justifyContent="flexEnd">
           <EuiFlexItem>
-            <EuiFormLabel>Aggregator script</EuiFormLabel>
-            <EuiCodeBlock language="yaml" data-test-subj={'aggregator_flyout_script'}>
-              {aggregator.aggregator_script}
+            <EuiFormLabel>aggregationQuery script</EuiFormLabel>
+            <EuiCodeBlock language="yaml" data-test-subj={'aggregationQuery_flyout_script'}>
+              {aggregationQuery.aggregation_script}
             </EuiCodeBlock>
           </EuiFlexItem>
         </EuiFlexGroup>

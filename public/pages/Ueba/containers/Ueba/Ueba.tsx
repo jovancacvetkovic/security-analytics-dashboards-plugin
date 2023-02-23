@@ -7,7 +7,7 @@ import { ROUTES } from '../../../../utils/constants';
 import * as H from 'history';
 import { DateTimeFilter } from '../../../Overview/models/interfaces';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { Inferences } from './Inferences';
+import { Inferences } from '../Inferences/Inferences';
 import { Aggregators } from '../Aggregators/Aggregators';
 import { AggregationQueries } from '../AggregationQueries/AggregationQueries';
 
@@ -50,7 +50,7 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
 
   const pathname = history.location.pathname;
   const initialTab = tabs.filter((tab) => tab.route === pathname);
-  const initialRoute = initialTab[0] ? initialTab[0].id : 'inference';
+  const initialRoute = initialTab[0] ? initialTab[0].id : 'inferences';
   const [selectedTabId, setSelectedTabId] = useState<string>(initialRoute);
 
   const onSelectedTabChanged = (id: string, route: string) => {
@@ -87,12 +87,20 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
           <Route
             exact
             path={`${ROUTES.UEBA_VIEW_AGGREGATORS}`}
-            render={(props) => <Aggregators services={services} history={history} />}
+            render={(props) => (
+              <Aggregators services={services} history={history} notifications={notifications} />
+            )}
           />
           <Route
             exact
             path={`${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`}
-            render={(props) => <AggregationQueries services={services} history={history} />}
+            render={(props) => (
+              <AggregationQueries
+                services={services}
+                history={history}
+                notifications={notifications}
+              />
+            )}
           />
           <Redirect to={`${ROUTES.UEBA_VIEW_INFERENCES}`} />
         </Switch>
