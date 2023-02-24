@@ -10,7 +10,7 @@ import {
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { BrowserServices } from '../../../../models/interfaces';
 import { CoreServicesContext } from '../../../../components/core_services';
-import { BREADCRUMBS } from '../../../../utils/constants';
+import { BREADCRUMBS, ROUTES } from '../../../../utils/constants';
 import * as H from 'history';
 import { UebaViewModelActor } from '../../models/UebaViewModelActor';
 import { AggregationQueryItem } from '../../models/interfaces';
@@ -104,7 +104,12 @@ export const AggregationQueries: React.FC<UebaProps> = ({ services, notification
   }, []);
 
   const actions = React.useMemo(
-    () => [<EuiButton>Actions</EuiButton>, <EuiButton>Create aggregation query</EuiButton>],
+    () => [
+      <EuiButton>Actions</EuiButton>,
+      <EuiButton href={`#${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`}>
+        Create aggregation query
+      </EuiButton>,
+    ],
     []
   );
 

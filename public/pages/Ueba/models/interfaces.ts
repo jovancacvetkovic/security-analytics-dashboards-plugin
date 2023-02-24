@@ -2,9 +2,9 @@ export interface AggregationQueryItem {
   id?: string;
   name: string;
   description: string;
-  source_index: string;
-  page_size: number;
-  aggregation_script: string;
+  dataSource: string;
+  pageSize?: number;
+  query: string;
 }
 
 export interface AggregatorItem {
@@ -19,7 +19,7 @@ export interface AggregatorItem {
 export interface DocumentItemProps {
   id?: string;
   name: string;
-  inference_model: string;
+  inferenceModel: string;
 }
 
 export interface DocumentItem<T> extends DocumentItemProps {

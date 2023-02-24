@@ -76,23 +76,23 @@ export const BREADCRUMBS = Object.freeze({
   UEBA: { text: 'UEBA', href: `#${ROUTES.UEBA}` },
   UEBA_CREATE_AGGREGATION_QUERY: {
     text: 'Create aggregation query',
-    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`,
+    href: `#${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`,
   },
   UEBA_CREATE_AGGREGATOR: {
     text: 'Create aggregator',
-    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_CREATE_AGGREGATOR}`,
+    href: `#${ROUTES.UEBA_CREATE_AGGREGATOR}`,
   },
   UEBA_VIEW_AGGREGATORS: {
     text: 'Aggregators',
-    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_AGGREGATORS}`,
+    href: `#${ROUTES.UEBA_VIEW_AGGREGATORS}`,
   },
   UEBA_VIEW_AGGREGATION_QUERIES: {
     text: 'Aggregation queries',
-    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`,
+    href: `#${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`,
   },
   UEBA_VIEW_INFERENCES: {
     text: 'Inferences',
-    href: `#${ROUTES.UEBA}/${ROUTES.UEBA_VIEW_INFERENCES}`,
+    href: `#${ROUTES.UEBA_VIEW_INFERENCES}`,
   },
 });
 

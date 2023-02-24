@@ -10,7 +10,7 @@ import {
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { BrowserServices } from '../../../../models/interfaces';
 import { CoreServicesContext } from '../../../../components/core_services';
-import { BREADCRUMBS } from '../../../../utils/constants';
+import { BREADCRUMBS, ROUTES } from '../../../../utils/constants';
 import * as H from 'history';
 import { AggregatorFlyout } from './AggregatorFlyout';
 import { WidgetContainer } from '../../../Overview/components/Widgets/WidgetContainer';
@@ -104,7 +104,10 @@ export const Aggregators: React.FC<UebaProps> = ({ services, notifications, hist
   }, []);
 
   const actions = React.useMemo(
-    () => [<EuiButton>Actions</EuiButton>, <EuiButton>Create aggregator</EuiButton>],
+    () => [
+      <EuiButton>Actions</EuiButton>,
+      <EuiButton href={`#${ROUTES.UEBA_CREATE_AGGREGATOR}`}>Create aggregator</EuiButton>,
+    ],
     []
   );
 

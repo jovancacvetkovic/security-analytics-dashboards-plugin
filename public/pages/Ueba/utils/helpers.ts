@@ -1,20 +1,6 @@
-import {
-  addInteractiveLegends,
-  alertsDefaultColor,
-  DateOpts,
-  defaultDateFormat,
-  defaultScaleDomain,
-  defaultTimeUnit,
-  getTimeTooltip,
-  getVisualizationSpec,
-  getXAxis,
-  getYAxis,
-} from '../../Overview/utils/helpers';
-
-import { euiPaletteColorBlind, euiPaletteForStatus } from '@elastic/eui';
+import { addInteractiveLegends, getVisualizationSpec } from '../../Overview/utils/helpers';
 
 export function getUebaVisualization(visualizationData: any[]) {
-  console.log(visualizationData);
   return getVisualizationSpec('Docs data overview', visualizationData, [
     addInteractiveLegends({
       mark: {

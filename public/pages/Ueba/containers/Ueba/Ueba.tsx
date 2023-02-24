@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { EuiTabs, EuiTab } from '@elastic/eui';
 
 import { NotificationsStart } from 'opensearch-dashboards/public';
@@ -53,6 +53,23 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
   const initialRoute = initialTab[0] ? initialTab[0].id : 'inferences';
   const [selectedTabId, setSelectedTabId] = useState<string>(initialRoute);
 
+  const renderTab = useCallback(
+    (tab: TabRoute) => (
+      <EuiTab
+        onClick={() => onSelectedTabChanged(tab.id, tab.route)}
+        isSelected={tab.id === selectedTabId}
+        key={tab.id}
+      >
+        {tab.name}
+      </EuiTab>
+    ),
+    [selectedTabId]
+  );
+
+  useEffect(() => {
+    setSelectedTabId(initialRoute);
+  }, [renderTab]);
+
   const onSelectedTabChanged = (id: string, route: string) => {
     setSelectedTabId(id);
 
@@ -62,20 +79,10 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
     }
   };
 
-  const renderTab = (tab: TabRoute) => (
-    <EuiTab
-      onClick={() => onSelectedTabChanged(tab.id, tab.route)}
-      isSelected={tab.id === selectedTabId}
-      key={tab.id}
-    >
-      {tab.name}
-    </EuiTab>
-  );
-
   return (
     <>
       <EuiTabs>{tabs.map(renderTab)}</EuiTabs>
-      <div style={{ padding: '25px 25px' }}>
+      <div style={{ padding: '25px 0' }}>
         <Switch>
           <Route
             exact
