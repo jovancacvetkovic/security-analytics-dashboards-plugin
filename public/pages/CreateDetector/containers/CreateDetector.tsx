@@ -38,6 +38,7 @@ import {
   successNotificationToast,
 } from '../../../utils/helpers';
 import { RulesViewModelActor } from '../../Rules/models/RulesViewModelActor';
+import { RuleCategory } from '../../../../server/models/interfaces';
 
 interface CreateDetectorProps extends RouteComponentProps {
   isEdit: boolean;
@@ -54,6 +55,7 @@ interface CreateDetectorState {
   rulesState: CreateDetectorRulesState;
   plugins: string[];
   loadingRules: boolean;
+  allRuleCategories: RuleCategory[];
 }
 
 export default class CreateDetector extends Component<CreateDetectorProps, CreateDetectorState> {
@@ -62,7 +64,9 @@ export default class CreateDetector extends Component<CreateDetectorProps, Creat
 
   constructor(props: CreateDetectorProps) {
     super(props);
-    this.rulesViewModelActor = new RulesViewModelActor(props.services.ruleService);
+    this.rulesViewModelActor = RulesViewModelActor.setupRulesViewModelActor(
+      props.services.ruleService
+    );
     this.state = {
       currentStep: DetectorCreationStep.DEFINE_DETECTOR,
       detector: EMPTY_DEFAULT_DETECTOR,
@@ -77,6 +81,7 @@ export default class CreateDetector extends Component<CreateDetectorProps, Creat
       rulesState: { page: { index: 0 }, allRules: [] },
       plugins: [],
       loadingRules: false,
+      allRuleCategories: [],
     };
   }
 
@@ -87,6 +92,7 @@ export default class CreateDetector extends Component<CreateDetectorProps, Creat
       BREADCRUMBS.DETECTORS_CREATE,
     ]);
     this.setupRulesState();
+    this.getAllRuleCategories();
     this.getPlugins();
   }
 
@@ -248,6 +254,13 @@ export default class CreateDetector extends Component<CreateDetectorProps, Creat
     });
   }
 
+  async getAllRuleCategories() {
+    const allRuleCategories = await this.rulesViewModelActor.getAllRuleCategories();
+    this.setState({
+      allRuleCategories,
+    });
+  }
+
   async getPlugins() {
     const { services } = this.props;
     const plugins = await getPlugins(services.opensearchService);
@@ -334,6 +347,7 @@ export default class CreateDetector extends Component<CreateDetectorProps, Creat
             filedMappingService={services.fieldMappingService}
             rulesState={this.state.rulesState}
             loadingRules={this.state.loadingRules}
+            allRuleCategories={this.state.allRuleCategories}
             onRuleToggle={this.onRuleToggle}
             onAllRulesToggle={this.onAllRulesToggle}
             onPageChange={this.onPageChange}
@@ -417,6 +431,7 @@ export default class CreateDetector extends Component<CreateDetectorProps, Creat
                 fill={true}
                 onClick={this.onNextClick}
                 disabled={!stepDataValid[currentStep]}
+                isLoading={this.state.loadingRules}
               >
                 Next
               </EuiButton>

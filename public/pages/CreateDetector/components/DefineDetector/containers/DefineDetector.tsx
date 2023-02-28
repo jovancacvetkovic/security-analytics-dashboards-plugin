@@ -23,6 +23,7 @@ import {
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import _ from 'lodash';
 import { logTypesWithDashboards } from '../../../../../utils/constants';
+import { RuleCategory } from '../../../../../../server/models/interfaces';
 
 interface DefineDetectorProps extends RouteComponentProps {
   detector: Detector;
@@ -31,6 +32,7 @@ interface DefineDetectorProps extends RouteComponentProps {
   filedMappingService: FieldMappingService;
   rulesState: CreateDetectorRulesState;
   notifications: NotificationsStart;
+  allRuleCategories: RuleCategory[];
   loadingRules?: boolean;
   changeDetector: (detector: Detector) => void;
   updateDataValidState: (step: DetectorCreationStep, isValid: boolean) => void;
@@ -205,6 +207,7 @@ export default class DefineDetector extends Component<DefineDetectorProps, Defin
 
         <DetectorType
           detectorType={detector_type}
+          allRuleCategories={this.props.allRuleCategories}
           onDetectorTypeChange={this.onDetectorTypeChange}
         />
 
