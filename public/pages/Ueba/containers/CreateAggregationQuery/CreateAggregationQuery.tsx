@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import * as ReactDOMServer from 'react-dom/server';
 
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { BrowserServices } from '../../../../models/interfaces';
@@ -20,11 +21,15 @@ import {
   EuiButton,
   EuiTitle,
   EuiComboBox,
-  EuiCodeEditor,
 } from '@elastic/eui';
 import { FormFieldHeader } from '../../../../components/FormFieldHeader/FormFieldHeader';
 import { validateDescription, validateName } from '../../../../utils/validation';
 import { CatIndex } from '../../../../../server/models/interfaces';
+
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/ext-language_tools';
+import _ from 'lodash';
 
 export interface UebaProps {
   services: BrowserServices;
@@ -39,33 +44,33 @@ export interface QueryEditorAnnotations {
   type: string;
 }
 
-const defaultQueryEditorValue = {
-  query: {
-    match_all: {},
+const DEFAULT_INPUT_VALUE = `{
+  "query": {
+    "match_all": {}
   },
-  size: 0,
-  aggs: {
-    itt: {
-      composite: {
-        size: 2,
-        sources: [{ user_id: { terms: { field: 'winlog.event_data.TargetUserSid.keyword' } } }],
+  "size": 0,
+  "aggs": {
+    "itt": {
+      "composite": {
+        "size": 2,
+        "sources": [{ "user_id": { "terms": { "field": "winlog.event_data.TargetUserSid.keyword" } } }]
       },
-      aggregations: {
-        ip_list: {
-          scripted_metric: {
-            init_script: "state['ips'] = new ArrayList()",
-            map_script:
+      "aggregations": {
+        "ip_list": {
+          "scripted_metric": {
+            "init_script": "state['ips'] = new ArrayList()",
+            "map_script":
               "state['ip'] = doc['winlog.event_data.IpAddress.keyword']; state.ips.add(state['ip'].value)",
-            combine_script:
-              'List combined = new ArrayList(); for (ip in state.ips) combined.add(ip); return combined',
-            reduce_script:
-              'List final = new ArrayList(); for (ip_list in states) final.addAll(ip_list); return final.stream().distinct().sorted().collect(Collectors.toList());',
-          },
-        },
-      },
-    },
-  },
-};
+            "combine_script":
+              "List combined = new ArrayList(); for (ip in state.ips) combined.add(ip); return combined",
+            "reduce_script":
+              "List final = new ArrayList(); for (ip_list in states) final.addAll(ip_list); return final.stream().distinct().sorted().collect(Collectors.toList());"
+          }
+        }
+      }
+    }
+  }
+}`;
 
 export const CreateAggregationQuery: React.FC<UebaProps> = ({
   services,
@@ -73,6 +78,10 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
   history,
 }) => {
   const context = useContext(CoreServicesContext);
+  const [annotations, setAnnotations] = useState<QueryEditorAnnotations[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [indexes, setIndexes] = useState<{ label: string; value: string }[]>([]);
+
   useEffect(() => {
     context?.chrome.setBreadcrumbs([
       BREADCRUMBS.SECURITY_ANALYTICS,
@@ -81,10 +90,6 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
       BREADCRUMBS.UEBA_CREATE_AGGREGATION_QUERY,
     ]);
   });
-
-  const [annotations, setAnnotations] = useState<QueryEditorAnnotations[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [indexes, setIndexes] = useState<{ label: string; value: string }[]>([]);
 
   const getIndices = useCallback(async () => {
     const indicesResponse = await services.indexService.getIndices();
@@ -105,34 +110,7 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
     getIndices();
   }, [getIndices]);
 
-  const onSubmit = async (values: AggregationQueryItem) => {
-    // const submitingRule = mapFormToRule(values);
-    // if (!validateRule(submitingRule, notifications!, 'create')) {
-    //   return;
-    // }
-    //
-    // let result;
-    // if (mode === 'edit') {
-    //   if (!rule) {
-    //     console.error('No rule id found');
-    //     return;
-    //   }
-    //   result = await ruleService.updateRule(rule?.id, submitingRule.category, submitingRule);
-    // } else {
-    //   result = await ruleService.createRule(submitingRule);
-    // }
-    //
-    // if (!result.ok) {
-    //   errorNotificationToast(
-    //     notifications!,
-    //     mode === 'create' ? 'create' : 'save',
-    //     'rule',
-    //     result.error
-    //   );
-    // } else {
-    //   history.replace(ROUTES.RULES);
-    // }
-  };
+  const onSubmit = async (values: AggregationQueryItem) => {};
 
   const onClose = useCallback(() => {
     history.replace(ROUTES.UEBA_VIEW_AGGREGATION_QUERIES);
@@ -166,9 +144,9 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
         errors.dataSource = 'Data source is required';
       }
 
-      // if (!values.query) {
-      //   errors.query = 'Aggregation query is required';
-      // }
+      if (!values.query) {
+        errors.query = 'Aggregation query is required';
+      }
 
       return errors;
     },
@@ -177,6 +155,20 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
       await onSubmit(values);
     },
   });
+
+  const customAceEditorCompleter = {
+    getCompletions: (editor, session, caretPosition2d, prefix, callback) => {
+      const suggestions = ['aggs', 'composite', 'aggregations'];
+      debugger;
+      callback(
+        null,
+        _.map(suggestions, (s) => {
+          debugger;
+          return { name: s, value: s, score: 1, meta: 'rhyme' };
+        })
+      );
+    },
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -199,7 +191,7 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
         >
           <EuiFieldText
             isInvalid={formik.touched.name && !!formik.errors.name}
-            placeholder="Enter rule name"
+            placeholder="Enter query name"
             data-test-subj={'rule_name_field'}
             name={'name'}
             onChange={formik.handleChange}
@@ -266,17 +258,16 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
           error={formik.errors?.query}
           fullWidth={true}
         >
-          <EuiCodeEditor
-            name={'query'}
-            theme={''}
+          <AceEditor
             mode="json"
-            width="100%"
-            value={formik.values.query || JSON.stringify(defaultQueryEditorValue, null, 2)}
-            onChange={(value) => formik.handleChange('query')(value)}
-            onBlur={formik.handleBlur('query')}
-            data-test-subj={'aggregation_query_field'}
-            placeholder={'Enter the aggregation query here'}
-            annotations={annotations}
+            theme="textmate"
+            name="editor"
+            width={'100%'}
+            fontSize={14}
+            editorProps={{ $blockScrolling: true }}
+            showPrintMargin={false}
+            defaultValue={DEFAULT_INPUT_VALUE}
+            enableBasicAutocompletion={true}
           />
         </EuiFormRow>
       </ContentPanel>

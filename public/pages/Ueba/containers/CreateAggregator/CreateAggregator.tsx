@@ -18,6 +18,7 @@ export const CreateAggregator: React.FC<UebaProps> = (props) => {
     context?.chrome.setBreadcrumbs([
       BREADCRUMBS.SECURITY_ANALYTICS,
       BREADCRUMBS.UEBA,
+      BREADCRUMBS.UEBA_VIEW_AGGREGATORS,
       BREADCRUMBS.UEBA_CREATE_AGGREGATOR,
     ]);
   });
