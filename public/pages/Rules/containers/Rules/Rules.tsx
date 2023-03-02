@@ -16,6 +16,7 @@ import { RuleViewerFlyout } from '../../components/RuleViewerFlyout/RuleViewerFl
 import { BREADCRUMBS, ROUTES } from '../../../../utils/constants';
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { CoreServicesContext } from '../../../../components/core_services';
+import { DataStore } from '../../../../store/DataStore';
 
 export interface RulesProps extends RouteComponentProps {
   notifications?: NotificationsStart;
@@ -24,6 +25,8 @@ export interface RulesProps extends RouteComponentProps {
 export const Rules: React.FC<RulesProps> = (props) => {
   const services = useContext(ServicesContext) as BrowserServices;
   const context = useContext(CoreServicesContext);
+  const rulesStore = DataStore.getStore('rules');
+  // const { rules: rulesStore } = DataStore.getStores();
   const rulesViewModelActor = useMemo(
     () => RulesViewModelActor.setupRulesViewModelActor(services.ruleService),
     [services]
@@ -47,7 +50,8 @@ export const Rules: React.FC<RulesProps> = (props) => {
 
   const getRules = useCallback(async () => {
     setLoading(true);
-    const allRules = await rulesViewModelActor.fetchRules();
+    // TODO: separate prePackaged and custom rules requests
+    const allRules = await rulesStore.fetchRules();
     setAllRules(allRules);
     setLoading(false);
   }, [rulesViewModelActor]);

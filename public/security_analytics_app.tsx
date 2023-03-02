@@ -27,6 +27,7 @@ import RuleService from './services/RuleService';
 import SavedObjectService from './services/SavedObjectService';
 import { SecurityAnalyticsPluginStartDeps } from './plugin';
 import { RulesViewModelActor } from './pages/Rules/models/RulesViewModelActor';
+import { DataStore } from './store/DataStore';
 
 export function renderApp(
   coreStart: CoreStart,
@@ -62,6 +63,12 @@ export function renderApp(
 
   const isDarkMode = coreStart.uiSettings.get('theme:darkMode') || false;
   RulesViewModelActor.setupRulesViewModelActor(ruleService);
+
+  DataStore.createStore(services);
+  DataStore.getInstance()?.registerModelActor(
+    'rules',
+    new RulesViewModelActor(services.ruleService)
+  );
 
   ReactDOM.render(
     <Router>
