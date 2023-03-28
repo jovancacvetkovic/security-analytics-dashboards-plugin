@@ -10,6 +10,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Inferences } from '../Inferences/Inferences';
 import { Aggregators } from '../Aggregators/Aggregators';
 import { AggregationQueries } from '../AggregationQueries/AggregationQueries';
+import { InferenceRunners } from '../InferenceRunners/InferenceRunners';
 
 export interface UebaProps {
   services: BrowserServices;
@@ -35,6 +36,11 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
       id: 'inferences',
       name: 'Inferences',
       route: ROUTES.UEBA_VIEW_INFERENCES,
+    },
+    {
+      id: 'inference_runners',
+      name: 'Inference runners',
+      route: ROUTES.UEBA_VIEW_INFERENCE_RUNNERS,
     },
     {
       id: 'aggregators',
@@ -88,14 +94,36 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
             exact
             path={`${ROUTES.UEBA_VIEW_INFERENCES}`}
             render={(props) => (
-              <Inferences services={services} notifications={notifications} history={history} />
+              <Inferences
+                {...props}
+                services={services}
+                notifications={notifications}
+                history={history}
+              />
+            )}
+          />
+          <Route
+            exact
+            path={`${ROUTES.UEBA_VIEW_INFERENCE_RUNNERS}`}
+            render={(props) => (
+              <InferenceRunners
+                {...props}
+                services={services}
+                notifications={notifications}
+                history={history}
+              />
             )}
           />
           <Route
             exact
             path={`${ROUTES.UEBA_VIEW_AGGREGATORS}`}
             render={(props) => (
-              <Aggregators services={services} history={history} notifications={notifications} />
+              <Aggregators
+                {...props}
+                services={services}
+                history={history}
+                notifications={notifications}
+              />
             )}
           />
           <Route
@@ -103,6 +131,7 @@ export const Ueba: React.FC<UebaProps> = ({ history, services, notifications }) 
             path={`${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`}
             render={(props) => (
               <AggregationQueries
+                {...props}
                 services={services}
                 history={history}
                 notifications={notifications}

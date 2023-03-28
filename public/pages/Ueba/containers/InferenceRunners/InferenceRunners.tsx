@@ -39,7 +39,7 @@ export interface DocumentsItem {
   id?: string;
 }
 
-export const Inferences: React.FC<UebaProps> = (props) => {
+export const InferenceRunners: React.FC<UebaProps> = (props) => {
   const {
     dateTimeFilter = {
       startTime: DEFAULT_DATE_RANGE.start,
@@ -130,7 +130,7 @@ export const Inferences: React.FC<UebaProps> = (props) => {
     context?.chrome.setBreadcrumbs([
       BREADCRUMBS.SECURITY_ANALYTICS,
       BREADCRUMBS.UEBA,
-      BREADCRUMBS.UEBA_VIEW_INFERENCES,
+      BREADCRUMBS.UEBA_VIEW_INFERENCE_RUNNERS,
     ]);
   });
 

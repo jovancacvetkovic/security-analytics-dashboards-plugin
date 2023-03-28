@@ -1,5 +1,4 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import * as ReactDOMServer from 'react-dom/server';
 
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { BrowserServices } from '../../../../models/interfaces';
@@ -20,7 +19,6 @@ import {
   EuiTextArea,
   EuiButton,
   EuiTitle,
-  EuiComboBox,
 } from '@elastic/eui';
 import { FormFieldHeader } from '../../../../components/FormFieldHeader/FormFieldHeader';
 import { validateDescription, validateName } from '../../../../utils/validation';
@@ -43,34 +41,6 @@ export interface QueryEditorAnnotations {
   text: string;
   type: string;
 }
-
-const DEFAULT_INPUT_VALUE = `{
-  "query": {
-    "match_all": {}
-  },
-  "size": 0,
-  "aggs": {
-    "itt": {
-      "composite": {
-        "size": 2,
-        "sources": [{ "user_id": { "terms": { "field": "winlog.event_data.TargetUserSid.keyword" } } }]
-      },
-      "aggregations": {
-        "ip_list": {
-          "scripted_metric": {
-            "init_script": "state['ips'] = new ArrayList()",
-            "map_script":
-              "state['ip'] = doc['winlog.event_data.IpAddress.keyword']; state.ips.add(state['ip'].value)",
-            "combine_script":
-              "List combined = new ArrayList(); for (ip in state.ips) combined.add(ip); return combined",
-            "reduce_script":
-              "List final = new ArrayList(); for (ip_list in states) final.addAll(ip_list); return final.stream().distinct().sorted().collect(Collectors.toList());"
-          }
-        }
-      }
-    }
-  }
-}`;
 
 export const CreateAggregationQuery: React.FC<UebaProps> = ({
   services,
@@ -119,10 +89,10 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
   const formik = useFormik({
     validateOnMount: true,
     validateOnChange: true,
+    validateOnBlur: true,
     initialValues: {
       name: '',
       description: '',
-      dataSource: '',
       query: '',
     },
     validate: (values) => {
@@ -140,10 +110,6 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
         errors.description = 'Invalid description.';
       }
 
-      if (!values.dataSource) {
-        errors.dataSource = 'Data source is required';
-      }
-
       if (!values.query) {
         errors.query = 'Aggregation query is required';
       }
@@ -159,15 +125,22 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
   const customAceEditorCompleter = {
     getCompletions: (editor, session, caretPosition2d, prefix, callback) => {
       const suggestions = ['aggs', 'composite', 'aggregations'];
-      debugger;
       callback(
         null,
         _.map(suggestions, (s) => {
-          debugger;
           return { name: s, value: s, score: 1, meta: 'rhyme' };
         })
       );
     },
+  };
+
+  const updateEditorNameAttribute = (item: HTMLElement) => {
+    if (item && item.refEditor) {
+      // ace editor doesn't set name attribute, but overrides it to an ID attribute instead
+      // the change is necessary because formik uses name attribute to bind input element to itself
+      const textAreaEls = item.refEditor.getElementsByClassName('ace_text-input');
+      if (textAreaEls?.length) textAreaEls[0].setAttribute('name', 'query');
+    }
   };
 
   return (
@@ -223,33 +196,6 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
 
       <EuiSpacer size={'m'} />
 
-      <ContentPanel title={'Data source'} titleSize={'m'}>
-        <EuiSpacer size={'m'} />
-        <EuiFormRow
-          label={<FormFieldHeader headerTitle={'Select or input indexes or index patterns'} />}
-          isInvalid={formik.touched.dataSource && !!formik.errors?.dataSource}
-          error={formik.errors?.dataSource}
-        >
-          <EuiComboBox
-            isInvalid={formik.touched.dataSource && !!formik.errors.dataSource}
-            isLoading={loading}
-            placeholder="Select a data source"
-            data-test-subj={'data_source_dropdown'}
-            options={indexes.map(({ value, label }) => ({ value, label }))}
-            singleSelection={{ asPlainText: true }}
-            onChange={(e) => formik.handleChange('dataSource')(e[0]?.value ? e[0].value : '')}
-            onBlur={formik.handleBlur('dataSource')}
-            selectedOptions={
-              formik.values.dataSource
-                ? [{ value: formik.values.dataSource, label: formik.values.dataSource }]
-                : []
-            }
-          />
-        </EuiFormRow>
-      </ContentPanel>
-
-      <EuiSpacer size={'m'} />
-
       <ContentPanel title={'Aggregation query'} titleSize={'m'}>
         <EuiSpacer size={'m'} />
         <EuiFormRow
@@ -257,17 +203,23 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
           isInvalid={formik.touched.query && !!formik.errors?.query}
           error={formik.errors?.query}
           fullWidth={true}
+          helpText={'Write an aggregation query here.'}
         >
           <AceEditor
+            ref={updateEditorNameAttribute}
             mode="json"
             theme="textmate"
-            name="editor"
+            name={'query'}
             width={'100%'}
             fontSize={14}
             editorProps={{ $blockScrolling: true }}
             showPrintMargin={false}
-            defaultValue={DEFAULT_INPUT_VALUE}
             enableBasicAutocompletion={true}
+            onChange={(value) => {
+              formik.handleChange('query')(value);
+            }}
+            onBlur={formik.handleBlur('query')}
+            value={formik.values.query}
           />
         </EuiFormRow>
       </ContentPanel>

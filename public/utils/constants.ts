@@ -43,6 +43,7 @@ export const ROUTES = Object.freeze({
   UEBA_VIEW_AGGREGATORS: '/ueba/aggregators',
   UEBA_VIEW_AGGREGATION_QUERIES: '/ueba/aggregation-queries',
   UEBA_VIEW_INFERENCES: '/ueba/inferences',
+  UEBA_VIEW_INFERENCE_RUNNERS: '/ueba/inference-runners',
 
   get LANDING_PAGE(): string {
     return this.OVERVIEW;
@@ -93,6 +94,10 @@ export const BREADCRUMBS = Object.freeze({
   UEBA_VIEW_INFERENCES: {
     text: 'Inferences',
     href: `#${ROUTES.UEBA_VIEW_INFERENCES}`,
+  },
+  UEBA_VIEW_INFERENCE_RUNNERS: {
+    text: 'Inference runners',
+    href: `#${ROUTES.UEBA_VIEW_INFERENCE_RUNNERS}`,
   },
 });
 

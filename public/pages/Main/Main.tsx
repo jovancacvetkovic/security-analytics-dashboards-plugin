@@ -450,6 +450,18 @@ export default class Main extends Component<MainProps, MainState> {
                           )}
                         />
                         <Route
+                          path={`${ROUTES.UEBA_VIEW_INFERENCE_RUNNERS}`}
+                          exact={true}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <Ueba
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
                           path={`${ROUTES.UEBA_VIEW_AGGREGATION_QUERIES}`}
                           render={(props: RouteComponentProps<any, any, any>) => (
                             <Ueba

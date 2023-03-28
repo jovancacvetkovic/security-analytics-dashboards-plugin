@@ -2,7 +2,6 @@ export interface AggregationQueryItem {
   id?: string;
   name: string;
   description: string;
-  dataSource: string;
   pageSize?: number;
   query: string;
 }
