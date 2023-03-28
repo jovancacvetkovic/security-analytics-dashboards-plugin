@@ -4,21 +4,21 @@
  */
 
 import { EuiBasicTableColumn } from '@elastic/eui';
+import { SortDirection } from '../../../utils/constants';
 import { AlertItem, DetectorItem, FindingItem } from './interfaces';
-import { AggregatorItem, InferenceItem } from '../../Ueba/models/interfaces';
-import { DocumentsItem } from '../../Ueba/containers/Ueba/Ueba';
 
-export type TableWidgetItem =
-  | FindingItem
-  | AlertItem
-  | DetectorItem
-  | AggregatorItem
-  | DocumentsItem
-  | InferenceItem;
+export type TableWidgetItem = FindingItem | AlertItem | DetectorItem;
 
 export type TableWidgetProps<T extends TableWidgetItem> = {
   columns: EuiBasicTableColumn<T>[];
   items: T[];
+  sorting?: {
+    sort: {
+      field: string;
+      direction: SortDirection;
+    };
+  };
+  className?: string;
   loading?: boolean;
-  search?: any;
+  message?: React.ReactNode;
 };

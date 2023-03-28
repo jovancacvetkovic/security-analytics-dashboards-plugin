@@ -31,6 +31,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
               "description": "detectorDescription",
@@ -53,6 +54,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
             },
@@ -183,20 +185,8 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
     }
   }
   detectorService={
-    DetectorService {
-      "createDetector": [Function],
-      "deleteDetector": [Function],
-      "getDetector": [Function],
+    Object {
       "getDetectors": [Function],
-      "osDriver": Object {
-        "delete": [MockFunction],
-        "get": [MockFunction],
-        "head": [MockFunction],
-        "post": [MockFunction],
-        "put": [MockFunction],
-      },
-      "searchDetectors": [Function],
-      "updateDetector": [Function],
     }
   }
   history={
@@ -549,6 +539,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
               "description": "detectorDescription",
@@ -571,6 +562,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
             },
@@ -728,6 +720,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                     },
                     "_version": 1,
                     "id": "rule_id_1",
+                    "prePackaged": true,
                   },
                 ],
                 "description": "detectorDescription",
@@ -750,6 +743,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                     },
                     "_version": 1,
                     "id": "rule_id_1",
+                    "prePackaged": true,
                   },
                 ],
               },
@@ -880,20 +874,8 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
       }
     }
     detectorService={
-      DetectorService {
-        "createDetector": [Function],
-        "deleteDetector": [Function],
-        "getDetector": [Function],
+      Object {
         "getDetectors": [Function],
-        "osDriver": Object {
-          "delete": [MockFunction],
-          "get": [MockFunction],
-          "head": [MockFunction],
-          "post": [MockFunction],
-          "put": [MockFunction],
-        },
-        "searchDetectors": [Function],
-        "updateDetector": [Function],
       }
     }
     editBasicDetails={[Function]}
@@ -908,6 +890,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
         "replace": [MockFunction],
       }
     }
+    isEditable={true}
     last_update_time={1}
     location={
       Object {
@@ -962,6 +945,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                     },
                     "_version": 1,
                     "id": "rule_id_1",
+                    "prePackaged": true,
                   },
                 ],
                 "description": "detectorDescription",
@@ -984,6 +968,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                     },
                     "_version": 1,
                     "id": "rule_id_1",
+                    "prePackaged": true,
                   },
                 ],
               },
@@ -1141,6 +1126,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                       },
                       "_version": 1,
                       "id": "rule_id_1",
+                      "prePackaged": true,
                     },
                   ],
                   "description": "detectorDescription",
@@ -1163,6 +1149,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                       },
                       "_version": 1,
                       "id": "rule_id_1",
+                      "prePackaged": true,
                     },
                   ],
                 },
@@ -1293,20 +1280,8 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
         }
       }
       detectorService={
-        DetectorService {
-          "createDetector": [Function],
-          "deleteDetector": [Function],
-          "getDetector": [Function],
+        Object {
           "getDetectors": [Function],
-          "osDriver": Object {
-            "delete": [MockFunction],
-            "get": [MockFunction],
-            "head": [MockFunction],
-            "post": [MockFunction],
-            "put": [MockFunction],
-          },
-          "searchDetectors": [Function],
-          "updateDetector": [Function],
         }
       }
       editBasicDetails={[Function]}
@@ -1321,6 +1296,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
           "replace": [MockFunction],
         }
       }
+      isEditable={true}
       last_update_time={1}
       location={
         Object {
@@ -2324,6 +2300,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                     },
                     "_version": 1,
                     "id": "rule_id_1",
+                    "prePackaged": true,
                   },
                 ],
                 "description": "detectorDescription",
@@ -2346,6 +2323,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                     },
                     "_version": 1,
                     "id": "rule_id_1",
+                    "prePackaged": true,
                   },
                 ],
               },
@@ -2503,6 +2481,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                       },
                       "_version": 1,
                       "id": "rule_id_1",
+                      "prePackaged": true,
                     },
                   ],
                   "description": "detectorDescription",
@@ -2525,6 +2504,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
                       },
                       "_version": 1,
                       "id": "rule_id_1",
+                      "prePackaged": true,
                     },
                   ],
                 },
@@ -2655,20 +2635,8 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
         }
       }
       detectorService={
-        DetectorService {
-          "createDetector": [Function],
-          "deleteDetector": [Function],
-          "getDetector": [Function],
+        Object {
           "getDetectors": [Function],
-          "osDriver": Object {
-            "delete": [MockFunction],
-            "get": [MockFunction],
-            "head": [MockFunction],
-            "post": [MockFunction],
-            "put": [MockFunction],
-          },
-          "searchDetectors": [Function],
-          "updateDetector": [Function],
         }
       }
       editBasicDetails={[Function]}
@@ -2683,6 +2651,7 @@ exports[`<DetectorDetails /> spec renders the component 1`] = `
           "replace": [MockFunction],
         }
       }
+      isEditable={true}
       last_update_time={1}
       location={
         Object {

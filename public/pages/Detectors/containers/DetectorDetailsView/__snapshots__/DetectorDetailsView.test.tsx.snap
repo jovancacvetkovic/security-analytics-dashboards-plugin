@@ -27,6 +27,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
                 },
                 "_version": 1,
                 "id": "rule_id_1",
+                "prePackaged": true,
               },
             ],
             "description": "detectorDescription",
@@ -49,6 +50,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
                 },
                 "_version": 1,
                 "id": "rule_id_1",
+                "prePackaged": true,
               },
             ],
           },
@@ -215,6 +217,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
               "description": "detectorDescription",
@@ -237,6 +240,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
             },
@@ -367,6 +371,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
     editBasicDetails={[MockFunction]}
     editDetectorRules={[MockFunction]}
     enabled_time={1}
+    isEditable={true}
     last_update_time={1}
     notifications={
       Object {
@@ -1352,6 +1357,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
               "description": "detectorDescription",
@@ -1374,6 +1380,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
                   },
                   "_version": 1,
                   "id": "rule_id_1",
+                  "prePackaged": true,
                 },
               ],
             },
@@ -1504,6 +1511,7 @@ exports[`<DetectorDetailsView /> spec renders the component 1`] = `
     editBasicDetails={[MockFunction]}
     editDetectorRules={[MockFunction]}
     enabled_time={1}
+    isEditable={true}
     last_update_time={1}
     notifications={
       Object {

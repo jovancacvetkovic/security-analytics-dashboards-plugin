@@ -21,6 +21,7 @@
     "plugin-helpers": "node ../../scripts/plugin_helpers",
     "test:jest": "../../node_modules/.bin/jest --config ./test/jest.config.js",
     "test:jest:dev": "../../node_modules/.bin/jest --watch --config ./test/jest.config.js",
+    "test:jest:update-snapshots": "yarn run test:jest -u",
     "build": "yarn plugin-helpers build",
     "postbuild": "echo Renaming build artifact to [$npm_package_config_zip_name-$npm_package_version.zip] && mv build/$npm_package_config_id*.zip build/$npm_package_config_zip_name-$npm_package_version.zip"
   },
@@ -45,7 +46,8 @@
     "ansi-regex": "^5.0.1",
     "minimist": "^1.2.6",
     "moment": "^2.29.2",
-    "async": "^3.2.3"
+    "async": "^3.2.3",
+    "json5": "^2.2.3"
   },
   "devDependencies": {
     "@elastic/elastic-eslint-config-kibana": "link:../../packages/opensearch-eslint-config-opensearch-dashboards",

@@ -27,6 +27,7 @@ exports[`<EditFieldMappings /> spec renders the component 1`] = `
                 },
                 "_version": 1,
                 "id": "rule_id_1",
+                "prePackaged": true,
               },
             ],
             "description": "detectorDescription",
@@ -49,6 +50,7 @@ exports[`<EditFieldMappings /> spec renders the component 1`] = `
                 },
                 "_version": 1,
                 "id": "rule_id_1",
+                "prePackaged": true,
               },
             ],
           },
@@ -315,6 +317,7 @@ exports[`<EditFieldMappings /> spec renders the component 1`] = `
                                     },
                                     "_version": 1,
                                     "id": "rule_id_1",
+                                    "prePackaged": true,
                                   },
                                 ],
                                 "description": "detectorDescription",
@@ -337,6 +340,7 @@ exports[`<EditFieldMappings /> spec renders the component 1`] = `
                                     },
                                     "_version": 1,
                                     "id": "rule_id_1",
+                                    "prePackaged": true,
                                   },
                                 ],
                               },
@@ -1099,6 +1103,45 @@ exports[`<EditFieldMappings /> spec renders the component 1`] = `
         className="euiSpacer euiSpacer--m"
       />
     </EuiSpacer>
+    <EuiCallOut
+      color="success"
+      title="All rule fields have been mapped"
+    >
+      <div
+        className="euiCallOut euiCallOut--success"
+      >
+        <div
+          className="euiCallOutHeader"
+        >
+          <span
+            className="euiCallOutHeader__title"
+          >
+            All rule fields have been mapped
+          </span>
+        </div>
+        <EuiText
+          color="default"
+          size="s"
+        >
+          <div
+            className="euiText euiText--small"
+          >
+            <EuiTextColor
+              color="default"
+              component="div"
+            >
+              <div
+                className="euiTextColor euiTextColor--default"
+              >
+                <p>
+                  Your data source have been mapped with all security rule fields.
+                </p>
+              </div>
+            </EuiTextColor>
+          </div>
+        </EuiText>
+      </div>
+    </EuiCallOut>
     <EuiSpacer
       size="m"
     >
