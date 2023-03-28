@@ -837,7 +837,7 @@ exports[`<UpdateDetectorBasicDetails /> spec renders the component 1`] = `
                                 Description
                               </strong>
                               <i>
-                                 - optional 
+                                 - optional
                               </i>
                             </div>
                           </EuiText>
@@ -920,7 +920,7 @@ exports[`<UpdateDetectorBasicDetails /> spec renders the component 1`] = `
         className="euiSpacer euiSpacer--xl"
       />
     </EuiSpacer>
-    <DetectorSchedule
+    <Schedule
       detector={
         Object {
           "createdBy": "someone",
@@ -1748,7 +1748,7 @@ exports[`<UpdateDetectorBasicDetails /> spec renders the component 1`] = `
           </div>
         </EuiPanel>
       </ContentPanel>
-    </DetectorSchedule>
+    </Schedule>
     <EuiSpacer
       size="xl"
     >

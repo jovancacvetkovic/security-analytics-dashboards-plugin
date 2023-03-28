@@ -146,7 +146,7 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
   return (
     <form onSubmit={formik.handleSubmit}>
       <EuiTitle size={'m'}>
-        <h3>{'Create aggregation query'}</h3>
+        <h3>Create aggregation query</h3>
       </EuiTitle>
 
       <EuiText size="s" color="subdued">

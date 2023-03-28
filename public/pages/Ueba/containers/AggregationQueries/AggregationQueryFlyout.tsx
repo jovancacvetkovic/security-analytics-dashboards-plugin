@@ -58,15 +58,9 @@ export const AggregationQueryFlyout: React.FC<AggregationQueryFlyoutProps> = ({
       <EuiFlyoutBody>
         <EuiFlexGroup justifyContent="flexEnd">
           <EuiFlexItem>
-            <EuiFormLabel>Aggregation query name</EuiFormLabel>
+            <EuiFormLabel>Name</EuiFormLabel>
             <EuiText data-test-subj={'aggregationQuery_flyout_name'}>
               {aggregationQuery.name}
-            </EuiText>
-          </EuiFlexItem>
-          <EuiFlexItem>
-            <EuiFormLabel>Source index</EuiFormLabel>
-            <EuiText data-test-subj={'aggregationQuery_flyout_source_index'}>
-              {aggregationQuery.source_index}
             </EuiText>
           </EuiFlexItem>
         </EuiFlexGroup>
@@ -78,19 +72,13 @@ export const AggregationQueryFlyout: React.FC<AggregationQueryFlyoutProps> = ({
               {aggregationQuery.description}
             </EuiText>
           </EuiFlexItem>
-          <EuiFlexItem>
-            <EuiFormLabel>Page size</EuiFormLabel>
-            <EuiText data-test-subj={'aggregationQuery_flyout_page_size'}>
-              {aggregationQuery.page_size}
-            </EuiText>
-          </EuiFlexItem>
         </EuiFlexGroup>
 
         <EuiSpacer />
 
         <EuiFlexGroup justifyContent="flexEnd">
           <EuiFlexItem>
-            <EuiFormLabel>aggregationQuery script</EuiFormLabel>
+            <EuiFormLabel>Aggregation query script</EuiFormLabel>
             <EuiCodeBlock language="yaml" data-test-subj={'aggregationQuery_flyout_script'}>
               {aggregationQuery.aggregation_script}
             </EuiCodeBlock>

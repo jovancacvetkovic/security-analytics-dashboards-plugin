@@ -10,9 +10,11 @@ export interface AggregatorItem {
   id?: string;
   name: string;
   description: string;
-  type: string;
-  schedule: any;
-  aggregators: string[];
+  dataSource: string;
+  schedule: {
+    selectedFrequency: string;
+  };
+  queryId: string;
 }
 
 export interface DocumentItemProps {
