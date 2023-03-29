@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState, useRef } from 'react';
 
 import { NotificationsStart } from 'opensearch-dashboards/public';
 import { BrowserServices } from '../../../../models/interfaces';
@@ -23,11 +23,7 @@ import {
 import { FormFieldHeader } from '../../../../components/FormFieldHeader/FormFieldHeader';
 import { validateDescription, validateName } from '../../../../utils/validation';
 import { CatIndex } from '../../../../../server/models/interfaces';
-
-import AceEditor from 'react-ace';
-import 'ace-builds/src-noconflict/mode-json';
-import 'ace-builds/src-noconflict/ext-language_tools';
-import _ from 'lodash';
+import MonacoEditor from 'react-monaco-editor';
 
 export interface UebaProps {
   services: BrowserServices;
@@ -122,24 +118,14 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
     },
   });
 
-  const customAceEditorCompleter = {
-    getCompletions: (editor, session, caretPosition2d, prefix, callback) => {
-      const suggestions = ['aggs', 'composite', 'aggregations'];
-      callback(
-        null,
-        _.map(suggestions, (s) => {
-          return { name: s, value: s, score: 1, meta: 'rhyme' };
-        })
-      );
-    },
-  };
+  const editorDidMount = (editor, monaco) => {
+    const textArea = editor._domElement?.getElementsByTagName('textarea')[0];
 
-  const updateEditorNameAttribute = (item: HTMLElement) => {
-    if (item && item.refEditor) {
-      // ace editor doesn't set name attribute, but overrides it to an ID attribute instead
-      // the change is necessary because formik uses name attribute to bind input element to itself
-      const textAreaEls = item.refEditor.getElementsByClassName('ace_text-input');
-      if (textAreaEls?.length) textAreaEls[0].setAttribute('name', 'query');
+    if (textArea) {
+      textArea.setAttribute('name', 'query');
+      textArea.addEventListener('blur', (e) => {
+        formik.handleBlur(e);
+      });
     }
   };
 
@@ -205,21 +191,18 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
           fullWidth={true}
           helpText={'Write an aggregation query here.'}
         >
-          <AceEditor
-            ref={updateEditorNameAttribute}
-            mode="json"
-            theme="textmate"
-            name={'query'}
-            width={'100%'}
-            fontSize={14}
-            editorProps={{ $blockScrolling: true }}
-            showPrintMargin={false}
-            enableBasicAutocompletion={true}
-            onChange={(value) => {
+          <MonacoEditor
+            width="800"
+            height="600"
+            language="json"
+            editorDidMount={editorDidMount}
+            value={formik.values.query}
+            options={{
+              selectOnLineNumbers: true,
+            }}
+            onChange={(value, e) => {
               formik.handleChange('query')(value);
             }}
-            onBlur={formik.handleBlur('query')}
-            value={formik.values.query}
           />
         </EuiFormRow>
       </ContentPanel>
