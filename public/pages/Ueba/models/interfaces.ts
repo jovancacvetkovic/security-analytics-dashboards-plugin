@@ -2,7 +2,7 @@ export interface AggregationQueryItem {
   id?: string;
   name: string;
   description: string;
-  pageSize?: number;
+  page_size?: number;
   query: string;
 }
 
@@ -10,7 +10,6 @@ export interface AggregatorItem {
   id?: string;
   name: string;
   description: string;
-  dataSource: string;
   schedule: {
     selectedFrequency: string;
   };
@@ -20,9 +19,22 @@ export interface AggregatorItem {
 export interface DocumentItemProps {
   id?: string;
   name: string;
-  inferenceModel: string;
+  inference_model: string;
 }
 
 export interface DocumentItem<T> extends DocumentItemProps {
   [key: string]: any;
+}
+
+export interface InferenceModelItemArg {
+  key: string;
+  display: string;
+  default_value: string;
+}
+export interface InferenceModelItem {
+  id: string;
+  name: string;
+  type: string;
+  description: string;
+  args: InferenceModelItemArg[];
 }

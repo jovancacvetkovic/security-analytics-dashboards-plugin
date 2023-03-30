@@ -69,6 +69,9 @@ export const METHOD_NAMES = {
   GET_CHANNElS: 'getChannels',
 
   GET_AGGREGATORS: 'getAggregators',
+  GET_AGGREGATION_QUERIES: 'getAggregationQueries',
+  GET_INFERENCE_MODELS: 'getInferenceModels',
+  GET_DOCUMENTS: 'getDocuments',
 };
 
 /**

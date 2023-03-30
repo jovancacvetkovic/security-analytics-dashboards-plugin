@@ -5,6 +5,7 @@ import {
   GetAggregationQueriesResponse,
   GetAggregatorsResponse,
   GetDocumentsResponse,
+  GetInferenceModelsResponse,
 } from '../../server/models/interfaces/Ueba';
 
 export default class UebaService {
@@ -31,5 +32,12 @@ export default class UebaService {
   getDocuments = async (pageSize: number = 10): Promise<ServerResponse<GetDocumentsResponse>> => {
     const url = `..${API.UEBA_BASE}/documents`;
     return (await this.httpClient.get(url, {})) as ServerResponse<GetDocumentsResponse>;
+  };
+
+  getInferenceModels = async (
+    pageSize: number = 10
+  ): Promise<ServerResponse<GetInferenceModelsResponse>> => {
+    const url = `..${API.UEBA_BASE}/inference_models`;
+    return (await this.httpClient.get(url, {})) as ServerResponse<GetInferenceModelsResponse>;
   };
 }

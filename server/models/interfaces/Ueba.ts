@@ -7,6 +7,7 @@ import {
   AggregatorItem,
   AggregationQueryItem,
   DocumentItem,
+  InferenceModelItem,
 } from '../../../public/pages/Ueba/models/interfaces';
 
 export interface GetAggregators {
@@ -36,6 +37,16 @@ export interface GetAggregatorsResponse {
 export interface GetDocumentsResponse {
   hits: {
     hits: DocumentItem<any>[];
+    total: {
+      value: number;
+    };
+    timed_out: boolean;
+  };
+}
+
+export interface GetInferenceModelsResponse {
+  hits: {
+    hits: InferenceModelItem[];
     total: {
       value: number;
     };

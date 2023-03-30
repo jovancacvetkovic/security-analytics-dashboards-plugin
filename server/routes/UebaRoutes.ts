@@ -33,4 +33,11 @@ export function setupUebaRoutes(services: NodeServices, router: IRouter) {
     },
     uebaServices.getDocuments
   );
+  router.get(
+    {
+      path: `${API.UEBA_BASE}/inference_models`,
+      validate: {},
+    },
+    uebaServices.getInferenceModels
+  );
 }

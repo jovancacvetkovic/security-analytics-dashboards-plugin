@@ -17,7 +17,9 @@ import {
   GetAggregationQueriesResponse,
   GetAggregatorsResponse,
   GetDocumentsResponse,
+  GetInferenceModelsResponse,
 } from '../models/interfaces/Ueba';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class UebaService {
   osDriver: ILegacyCustomClusterClient;
@@ -36,7 +38,7 @@ export default class UebaService {
     try {
       // const { callAsCurrentUser: callWithRequest } = this.osDriver.asScoped(request);
       // const getAggregationQueriesResponse: GetRulesResponse = await callWithRequest(
-      //   CLIENT_UEBA_METHODS.GET_AGGREGATORS
+      //   CLIENT_UEBA_METHODS.GET_AGGREGATION_QUERIES
       // );
 
       const getAggregationQueriesResponse: GetAggregationQueriesResponse = {
@@ -45,9 +47,7 @@ export default class UebaService {
             {
               name: 'Aggregator query I',
               description: 'This is a aggregation query description.',
-              source_index: 'cypress-dns-index',
-              page_size: 10,
-              aggregation_script:
+              query:
                 '{\n' +
                 '  "query": {\n' +
                 '    "match_all": {}\n' +
@@ -121,9 +121,10 @@ export default class UebaService {
             {
               name: 'Aggregator I',
               description: 'Any text can go here.',
-              type: 'itt',
-              schedule: {},
-              aggregators: ['Aggregator model itt'],
+              schedule: {
+                selectedFrequency: '',
+              },
+              queryId: `query_id_${uuidv4()}`,
             },
           ],
           total: {
@@ -161,8 +162,8 @@ export default class UebaService {
   > => {
     try {
       // const { callAsCurrentUser: callWithRequest } = this.osDriver.asScoped(request);
-      // const getAggregatorsResponse: GetRulesResponse = await callWithRequest(
-      //   CLIENT_UEBA_METHODS.GET_AGGREGATORS
+      // const getInferencesResponse: GetDocumentsResponse = await callWithRequest(
+      //   CLIENT_UEBA_METHODS.GET_DOCUMENTS
       // );
 
       const getInferencesResponse: GetDocumentsResponse = {
@@ -203,6 +204,63 @@ export default class UebaService {
       });
     } catch (error: any) {
       console.error('Security Analytics - UebaServices - getDocuments:', error);
+      return response.custom({
+        statusCode: 200,
+        body: {
+          ok: false,
+          error: error.message,
+        },
+      });
+    }
+  };
+
+  getInferenceModels = async (
+    _context: RequestHandlerContext,
+    request: OpenSearchDashboardsRequest<{}>,
+    response: OpenSearchDashboardsResponseFactory
+  ): Promise<
+    IOpenSearchDashboardsResponse<ServerResponse<GetInferenceModelsResponse> | ResponseError>
+  > => {
+    try {
+      // const { callAsCurrentUser: callWithRequest } = this.osDriver.asScoped(request);
+      // const getInferenceModelsResponse: GetInferenceModelsResponse = await callWithRequest(
+      //   CLIENT_UEBA_METHODS.GET_INFERENCE_MODELS
+      // );
+
+      const getInferenceModelsResponse: GetInferenceModelsResponse = {
+        hits: {
+          hits: [
+            {
+              id: `inference_model_id_${uuidv4()}`,
+              description: 'description for ITT_1',
+              type: 'itt',
+              name: 'ITT_1',
+              args: [],
+            },
+            {
+              id: `inference_model_id_${uuidv4()}`,
+              description: 'description ITT_2',
+              name: 'ITT_2',
+              type: 'itt',
+              args: [],
+            },
+          ],
+          total: {
+            value: 2,
+          },
+          timed_out: false,
+        },
+      };
+
+      return response.custom({
+        statusCode: 200,
+        body: {
+          ok: true,
+          response: getInferenceModelsResponse,
+        },
+      });
+    } catch (error: any) {
+      console.error('Security Analytics - UebaServices - getInferenceModels:', error);
       return response.custom({
         statusCode: 200,
         body: {

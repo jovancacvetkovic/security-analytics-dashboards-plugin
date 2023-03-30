@@ -9,8 +9,6 @@ import {
   EuiTextArea,
   EuiButton,
   EuiTitle,
-  EuiSelect,
-  EuiSelectOption,
   EuiComboBox,
 } from '@elastic/eui';
 import { NotificationsStart } from 'opensearch-dashboards/public';
@@ -19,17 +17,12 @@ import { CoreServicesContext } from '../../../../components/core_services';
 import { BREADCRUMBS, ROUTES } from '../../../../utils/constants';
 import * as H from 'history';
 import { FormikErrors, useFormik } from 'formik';
-import { AggregatorItem } from '../../models/interfaces';
+import { InferenceModelItem } from '../../models/interfaces';
 import { validateDescription, validateName } from '../../../../utils/validation';
 import { ContentPanel } from '../../../../components/ContentPanel';
 import { FormFieldHeader } from '../../../../components/FormFieldHeader/FormFieldHeader';
-import { Daily } from '../../../CreateDetector/components/DefineDetector/components/DetectorSchedule/Daily';
-import { Weekly } from '../../../CreateDetector/components/DefineDetector/components/DetectorSchedule/Weekly';
-import { Monthly } from '../../../CreateDetector/components/DefineDetector/components/DetectorSchedule/Monthly';
-import { CustomCron } from '../../../CreateDetector/components/DefineDetector/components/DetectorSchedule/CustomCron';
-import { Interval } from '../../../CreateDetector/components/DefineDetector/components/DetectorSchedule/Interval';
-import { Schedule } from '../../../../components/Schedule/Schedule';
 import { RunnerFieldMappings } from '../../components/RunnerFieldMappings/RunnerFieldMappings';
+import { DataStore } from '../../../../store/DataStore';
 
 export interface UebaProps {
   services: BrowserServices;
@@ -37,21 +30,18 @@ export interface UebaProps {
   history: H.History;
 }
 
+interface IInferenceModelSubmitProps {
+  name: string;
+  description: string;
+  inferenceModelId: string;
+}
+
 export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
   const context = useContext(CoreServicesContext);
 
-  const components: { [freq: string]: typeof React.Component } = {
-    daily: Daily,
-    weekly: Weekly,
-    monthly: Monthly,
-    cronExpression: CustomCron,
-    interval: Interval,
-  };
-
-  const frequencies: EuiSelectOption[] = [{ value: 'interval', text: 'By interval' }];
-  const [selectedFrequency, setSelectedFrequency] = useState<string>(frequencies[0].value);
   const [loading, setLoading] = useState<boolean>(true);
   const [modelOptions, setModelOptions] = useState<any[]>([]);
+  const [selectedModels, setSelectedModels] = useState<any[]>([]);
 
   useEffect(() => {
     context?.chrome.setBreadcrumbs([
@@ -62,7 +52,25 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
     ]);
   });
 
-  const onSubmit = async (values: AggregatorItem) => {};
+  const getInferenceModels = async () => {
+    const models = await DataStore.ueba.getInferenceModels();
+    setModelOptions(
+      models.map((hit: InferenceModelItem) => ({
+        value: hit.id,
+        label: hit.name,
+        description: hit.description,
+      }))
+    );
+
+    setSelectedModels(modelOptions.length ? modelOptions[0] : []);
+  };
+
+  useEffect(() => {
+    getInferenceModels();
+    setLoading(false);
+  }, [setModelOptions]);
+
+  const onSubmit = async (values: IInferenceModelSubmitProps) => {};
 
   const formik = useFormik({
     validateOnMount: true,
@@ -71,14 +79,10 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
     initialValues: {
       name: '',
       description: '',
-      schedule: {
-        selectedFrequency: frequencies[0].value,
-      },
-      dataSource: '',
-      queryId: '',
+      inferenceModelId: '',
     },
     validate: (values) => {
-      const errors: FormikErrors<AggregatorItem> = {};
+      const errors: FormikErrors<IInferenceModelSubmitProps> = {};
 
       if (!values.name || !values.name.length) {
         errors.name = 'Aggregation query name is required';
@@ -92,18 +96,10 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
         errors.description = 'Invalid description.';
       }
 
-      if (!values.schedule.selectedFrequency) {
-        errors.schedule = {
-          selectedFrequency: 'Can not be empty',
-        };
-      }
-
-      if (!values.dataSource) {
-        errors.dataSource = 'Aggregation query is required';
-      }
-
-      if (!values.queryId) {
-        errors.queryId = 'Aggregation query is required';
+      if (!values.inferenceModelId) {
+        errors.inferenceModelId = 'Inference model is required';
+      } else {
+        setSelectedModels([values.inferenceModelId]);
       }
 
       return errors;
@@ -114,15 +110,22 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
     },
   });
 
-  const FrequencyPicker = components[selectedFrequency];
-
-  const onFrequencySelected = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFrequency(event.target.value);
-  };
-
   const onClose = useCallback(() => {
-    history.replace(ROUTES.UEBA_VIEW_AGGREGATORS);
+    history.replace(ROUTES.UEBA_VIEW_INFERENCE_RUNNERS);
   }, [history]);
+
+  const renderModelOption = (option) => {
+    const { label, description } = option;
+    debugger;
+    return (
+      <EuiText size="xs">
+        <dl>
+          <dt>{label}</dt>
+          <dd>{description}</dd>
+        </dl>
+      </EuiText>
+    );
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -141,12 +144,12 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
           label={<FormFieldHeader headerTitle={'Name'} />}
           isInvalid={formik.touched.name && !!formik.errors?.name}
           error={formik.errors?.name}
-          helpText="Aggregation query name must contain 5-50 characters. Valid characters are a-z, A-Z, 0-9, hyphens, spaces, and underscores."
+          helpText="Runner name must contain 5-50 characters. Valid characters are a-z, A-Z, 0-9, hyphens, spaces, and underscores."
         >
           <EuiFieldText
             isInvalid={formik.touched.name && !!formik.errors.name}
-            placeholder="Enter query name"
-            data-test-subj={'rule_name_field'}
+            placeholder="Enter runner name"
+            data-test-subj={'runner_name_field'}
             name={'name'}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -165,7 +168,7 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
           }
         >
           <EuiTextArea
-            placeholder={'Enter a description for the aggregation query.'}
+            placeholder={'Enter a description for the inference runner.'}
             compressed={true}
             name={'description'}
             onChange={formik.handleChange}
@@ -180,19 +183,33 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
       <ContentPanel title={'Inference model'} titleSize={'m'}>
         <EuiSpacer size={'m'} />
         <EuiFormRow
-          label={<FormFieldHeader headerTitle={'Select an input source for the detector.'} />}
-          isInvalid={formik.touched.name && !!formik.errors?.name}
-          error={formik.errors?.name}
-          helpText="Aggregation query name must contain 5-50 characters. Valid characters are a-z, A-Z, 0-9, hyphens, spaces, and underscores."
+          label={<FormFieldHeader headerTitle={'Select an inference model'} />}
+          isInvalid={formik.touched.inferenceModelId && !!formik.errors?.inferenceModelId}
+          error={formik.errors?.inferenceModelId}
+          helpText="This is a mandatory field."
         >
           <EuiComboBox
-            placeholder={'Select an input source for the detector.'}
-            isLoading={loading}
+            placeholder="Select an inference model"
             options={modelOptions}
-            selectedOptions={[]}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            isClearable={true}
+            singleSelection={{ asPlainText: true }}
+            isClearable={false}
+            renderOption={renderModelOption}
+            onChange={(e) => {
+              formik.handleChange('inferenceModelId')(e[0]?.value ? e[0].value : '');
+            }}
+            onBlur={formik.handleBlur('inferenceModelId')}
+            selectedOptions={
+              formik.values.inferenceModelId
+                ? [
+                    {
+                      value: formik.values.inferenceModelId,
+                      label: modelOptions.filter(
+                        (model) => model.value === formik.values.inferenceModelId
+                      )[0].label,
+                    },
+                  ]
+                : []
+            }
           />
         </EuiFormRow>
       </ContentPanel>
@@ -201,7 +218,7 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
 
       <ContentPanel title={'Inference model arguments mapping'} titleSize={'m'}>
         <EuiSpacer size={'m'} />
-        <RunnerFieldMappings />
+        <RunnerFieldMappings loading={loading} />
       </ContentPanel>
 
       <EuiSpacer />
@@ -213,7 +230,7 @@ export const CreateInferenceRunner: React.FC<UebaProps> = ({ history }) => {
         <EuiFlexItem grow={false}>
           <EuiButton
             onClick={() => formik.handleSubmit()}
-            data-test-subj={'submit_aggregation_query_form_button'}
+            data-test-subj={'submit_runner_form_button'}
             fill
             disabled={!formik.isValid}
           >

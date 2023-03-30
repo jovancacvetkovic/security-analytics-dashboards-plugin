@@ -14,8 +14,7 @@ import {
   EuiComboBox,
 } from '@elastic/eui';
 
-export const RunnerFieldMappings: React.FC<any> = ({ history }) => {
-  const [loading, setLoading] = useState<boolean>(true);
+export const RunnerFieldMappings: React.FC<any> = ({ history, loading }) => {
   const [pageIndex, setPageIndex] = useState<number>(0);
   const columns: EuiBasicTableColumn<any>[] = [
     {
