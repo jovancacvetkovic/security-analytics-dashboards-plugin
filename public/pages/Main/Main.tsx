@@ -36,8 +36,9 @@ import { ImportRule } from '../Rules/containers/ImportRule/ImportRule';
 import { DuplicateRule } from '../Rules/containers/DuplicateRule/DuplicateRule';
 import { DateTimeFilter } from '../Overview/models/interfaces';
 import { Ueba } from '../Ueba/containers/Ueba/Ueba';
-import { CreateAggregator } from '../Ueba/containers/CreateAggregator/CreateAggregator';
-import { CreateAggregationQuery } from '../Ueba/containers/CreateAggregationQuery/CreateAggregationQuery';
+import { CreateAggregator } from '../Ueba/containers/Aggregators/CreateAggregator';
+import { CreateAggregationQuery } from '../Ueba/containers/AggregationQueries/CreateAggregationQuery';
+import { CreateInferenceRunner } from '../Ueba/containers/InferenceRunners/CreateInferenceRunner';
 
 enum Navigation {
   SecurityAnalytics = 'Security Analytics',
@@ -498,6 +499,17 @@ export default class Main extends Component<MainProps, MainState> {
                           path={`${ROUTES.UEBA_CREATE_AGGREGATION_QUERY}`}
                           render={(props: RouteComponentProps<any, any, any>) => (
                             <CreateAggregationQuery
+                              {...props}
+                              services={services}
+                              history={props.history}
+                              notifications={core?.notifications}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${ROUTES.UEBA_CREATE_INFERENCE_RUNNER}`}
+                          render={(props: RouteComponentProps<any, any, any>) => (
+                            <CreateInferenceRunner
                               {...props}
                               services={services}
                               history={props.history}

@@ -40,6 +40,7 @@ export const ROUTES = Object.freeze({
   UEBA: '/ueba',
   UEBA_CREATE_AGGREGATION_QUERY: '/ueba/create-aggregation_query',
   UEBA_CREATE_AGGREGATOR: '/ueba/create-aggregator',
+  UEBA_CREATE_INFERENCE_RUNNER: '/ueba/create-inference-runner',
   UEBA_VIEW_AGGREGATORS: '/ueba/aggregators',
   UEBA_VIEW_AGGREGATION_QUERIES: '/ueba/aggregation-queries',
   UEBA_VIEW_INFERENCES: '/ueba/inferences',
@@ -82,6 +83,10 @@ export const BREADCRUMBS = Object.freeze({
   UEBA_CREATE_AGGREGATOR: {
     text: 'Create aggregator',
     href: `#${ROUTES.UEBA_CREATE_AGGREGATOR}`,
+  },
+  UEBA_CREATE_INFERENCE_RUNNER: {
+    text: 'Create inference runner',
+    href: `#${ROUTES.UEBA_CREATE_INFERENCE_RUNNER}`,
   },
   UEBA_VIEW_AGGREGATORS: {
     text: 'Aggregators',

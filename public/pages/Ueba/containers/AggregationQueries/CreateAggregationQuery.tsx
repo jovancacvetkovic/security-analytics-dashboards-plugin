@@ -108,6 +108,13 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
 
       if (!values.query) {
         errors.query = 'Aggregation query is required';
+      } else {
+        try {
+          JSON.parse(values.query);
+        } catch (e: any) {
+          formik.touched.query = true;
+          errors.query = e.message;
+        }
       }
 
       return errors;
@@ -123,10 +130,22 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
 
     if (textArea) {
       textArea.setAttribute('name', 'query');
-      textArea.addEventListener('blur', (e) => {
+      textArea.addEventListener('blur', (e: any) => {
         formik.handleBlur(e);
       });
     }
+  };
+
+  const formatQuery = (query: string): string => {
+    if (!query) return query;
+
+    const toString = (query: object) => JSON.stringify(query, null, 2);
+
+    try {
+      query = toString(JSON.parse(query));
+    } catch (e) {}
+
+    return query;
   };
 
   return (
@@ -197,12 +216,10 @@ export const CreateAggregationQuery: React.FC<UebaProps> = ({
             language="json"
             editorDidMount={editorDidMount}
             value={formik.values.query}
-            options={{
-              selectOnLineNumbers: true,
-            }}
             onChange={(value, e) => {
               formik.handleChange('query')(value);
             }}
+            options={{}}
           />
         </EuiFormRow>
       </ContentPanel>
