@@ -25,7 +25,9 @@ Cypress.Commands.add('getInputByPlaceholder', (placeholder) => {
 });
 
 Cypress.Commands.add('getComboboxByPlaceholder', (placeholder) => {
-  Cypress.log({ message: `Get combobox element by placeholder: ${placeholder}` });
+  Cypress.log({
+    message: `Get combobox element by placeholder: ${placeholder}`,
+  });
   return cy
     .getElementByText('.euiComboBoxPlaceholder', placeholder)
     .siblings('.euiComboBox__input')
@@ -62,17 +64,7 @@ Cypress.Commands.add(
       items = [items];
     }
     Cypress.log({ message: `Select combobox items: ${items.join(' | ')}` });
-    cy.wrap(subject)
-      .focus()
-      .click({ force: true })
-      .then(() => {
-        items.map((item) =>
-          cy.get('.euiComboBoxOptionsList__rowWrap').within(() => {
-            cy.get('button').contains(item).should('be.visible');
-            cy.get('button').contains(item).click();
-          })
-        );
-      });
+    items.map((item) => cy.wrap(subject).type(item).type('{enter}'));
   }
 );
 
@@ -83,6 +75,7 @@ Cypress.Commands.add(
   },
   (subject) => {
     Cypress.log({ message: `Clear combobox` });
+
     return cy
       .wrap(subject)
       .parents('.euiComboBox__inputWrap')
@@ -93,17 +86,15 @@ Cypress.Commands.add(
           message: `Number of combo badges to clear: ${numberOfBadges}`,
         });
 
-        cy.wrap(subject)
-          .parents('.euiComboBox__inputWrap')
-          .find('input')
-          .focus()
-          .pressBackspaceKey(numberOfBadges);
+        _.times(numberOfBadges, () => cy.wrap(subject).type('{backspace}'));
       });
   }
 );
 
 Cypress.Commands.add('validateDetailsItem', (label, value) => {
-  Cypress.log({ message: `Validate details item by label: ${label} and value: ${value}` });
+  Cypress.log({
+    message: `Validate details item by label: ${label} and value: ${value}`,
+  });
   return cy.getElementByText('.euiFlexItem label', label).parent().siblings().contains(value);
 });
 
@@ -124,9 +115,30 @@ Cypress.Commands.add(
     Cypress.automation('remote:debugger:protocol', {
       command: 'Input.dispatchKeyEvent',
       params: {
+        type: 'rawKeyDown',
+        unmodifiedText: '\r',
+        text: '\r',
+        windowsVirtualKeyCode: 13,
+      },
+    });
+
+    Cypress.automation('remote:debugger:protocol', {
+      command: 'Input.dispatchKeyEvent',
+      params: {
         type: 'char',
         unmodifiedText: '\r',
         text: '\r',
+        windowsVirtualKeyCode: 13,
+      },
+    });
+
+    Cypress.automation('remote:debugger:protocol', {
+      command: 'Input.dispatchKeyEvent',
+      params: {
+        type: 'keyUp',
+        unmodifiedText: '\r',
+        text: '\r',
+        windowsVirtualKeyCode: 13,
       },
     });
 
@@ -154,11 +166,11 @@ Cypress.Commands.add(
           windowsVirtualKeyCode: 8,
         },
       });
-      cy.wait(10);
+
       Cypress.automation('remote:debugger:protocol', {
         command: 'Input.dispatchKeyEvent',
         params: {
-          type: 'rawKeyUp',
+          type: 'keyUp',
           keyCode: 8,
           code: 'Backspace',
           key: 'Backspace',
@@ -236,45 +248,46 @@ export const createDetector = (
     ],
   };
 
-  const cySubject = cy
-    .cleanUpTests()
-    // Create test index
-    .then(() => cy.createIndex(indexName, indexSettings))
+  return (
+    cy
+      .cleanUpTests()
+      // Create test index
+      .then(() => cy.createIndex(indexName, indexSettings))
 
-    // Create field mappings
-    .then(() =>
-      cy.createAliasMappings(indexName, detectorConfig.detector_type, indexMappings, true)
-    )
+      // Create field mappings
+      .then(() =>
+        cy.createAliasMappings(indexName, detectorConfig.detector_type, indexMappings, true)
+      )
 
-    // Create rule
-    .then(() => {
-      cy.createRule(ruleSettings)
-        .then((response) => {
-          detectorConfig.inputs[0].detector_input.custom_rules[0].id = response.body.response._id;
-          detectorConfig.triggers[0].ids.push(response.body.response._id);
-        })
-        // create the detector
-        .then(() => cy.createDetector(detectorConfig));
-    })
+      // Create rule
+      .then(() => {
+        cy.createRule(ruleSettings)
+          .then((response) => {
+            detectorConfig.inputs[0].detector_input.custom_rules[0].id = response.body.response._id;
+            detectorConfig.triggers[0].ids.push(response.body.response._id);
+          })
+          // create the detector
+          .then(() => cy.createDetector(detectorConfig));
+      })
 
-    .then(() => {
-      // Go to the detectors table page
-      cy.visit(`${OPENSEARCH_DASHBOARDS_URL}/detectors`);
+      .then(() => {
+        // Go to the detectors table page
+        cy.visit(`${OPENSEARCH_DASHBOARDS_URL}/detectors`);
 
-      // Filter table to only show the test detector
-      cy.get(`input[type="search"]`).type(`${detectorConfig.name}{enter}`);
+        // Filter table to only show the test detector
+        cy.get(`input[type="search"]`).type(`${detectorConfig.name}{enter}`);
 
-      // Confirm detector was created
-      cy.get('tbody > tr').should(($tr) => {
-        expect($tr, 'detector name').to.contain(detectorConfig.name);
-      });
-    });
+        // Confirm detector was created
+        cy.get('tbody > tr').should(($tr) => {
+          expect($tr, 'detector name').to.contain(detectorConfig.name);
+        });
 
-  // Ingest documents to the test index
-  for (let i = 0; i < indexDocsCount; i++) {
-    cy.insertDocumentToIndex(indexName, '', indexDoc);
-  }
+        // Ingest documents to the test index
+        for (let i = 0; i < indexDocsCount; i++) {
+          cy.insertDocumentToIndex(indexName, '', indexDoc);
+        }
 
-  cySubject.detector = detectorConfig;
-  return cySubject;
+        return cy.wrap(detectorConfig);
+      })
+  );
 };
