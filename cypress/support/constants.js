@@ -25,5 +25,5 @@ export const NODE_API = {
   INDEX_TEMPLATE_BASE: '/_index_template',
 };
 
-export const { opensearch_dashboards: OPENSEARCH_DASHBOARDS } = Cypress.env();
+export const { openSearchDashboards: OPENSEARCH_DASHBOARDS } = Cypress.env();
 export const OPENSEARCH_DASHBOARDS_URL = `${OPENSEARCH_DASHBOARDS}/app/${PLUGIN_NAME}#`;

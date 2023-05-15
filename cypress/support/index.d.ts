@@ -231,6 +231,20 @@ declare namespace Cypress {
     createRule(ruleJSON: object): Chainable<any>;
 
     /**
+     * Creates a custom rule
+     * @example
+     * cy.deleteRule('Rule name')
+     */
+    deleteRule(ruleName: string): Chainable<any>;
+
+    /**
+     * Creates a custom rule
+     * @example
+     * cy.updateRule({})
+     */
+    updateRule(ruleId: string, ruleJSON: object): Chainable<any>;
+
+    /**
      * Updates settings for index
      * @example
      * cy.updateIndexSettings("some_index", settings)

@@ -39,7 +39,7 @@ require('./helpers');
 Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
   // Add the basic auth header when security enabled in the Opensearch cluster
   // https://github.com/cypress-io/cypress/issues/1288
-  if (Cypress.env('security_enabled')) {
+  if (Cypress.env('SECURITY_ENABLED')) {
     const ADMIN_AUTH = {
       username: Cypress.env('username'),
       password: Cypress.env('password'),
@@ -69,7 +69,7 @@ Cypress.Commands.overwrite('request', (originalFn, ...args) => {
     username: Cypress.env('username'),
     password: Cypress.env('password'),
   };
-  if (Cypress.env('security_enabled')) {
+  if (Cypress.env('SECURITY_ENABLED')) {
     defaults.auth = ADMIN_AUTH;
   }
 

@@ -28,8 +28,8 @@ Cypress.on('uncaught:exception', (err) => {
 
 // Switch the base URL of Opensearch when security enabled in the cluster
 // Not doing this for Dashboards because it can still use http when security enabled
-if (Cypress.env('security_enabled')) {
-  Cypress.env('opensearch', `https://${Cypress.env('opensearch_url')}`);
+if (Cypress.env('SECURITY_ENABLED')) {
+  Cypress.env('opensearch', `https://${Cypress.env('openSearchUrl')}`);
 } else {
-  Cypress.env('opensearch', `http://${Cypress.env('opensearch_url')}`);
+  Cypress.env('opensearch', `http://${Cypress.env('openSearchUrl')}`);
 }
