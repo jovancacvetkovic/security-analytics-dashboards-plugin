@@ -38,15 +38,12 @@ describe('Alerts', () => {
 
   beforeEach(() => {
     // Visit Alerts table page
-    cy.intercept('/detectors/_search').as('detectorsSearch');
+    cy.intercept({
+      pathname: '/_plugins/_security_analytics/detectors/_search',
+    }).as('detectorsSearch');
     // Visit Detectors page
     cy.visit(`${OPENSEARCH_DASHBOARDS_URL}/alerts`);
     cy.wait('@detectorsSearch').should('have.property', 'state', 'Complete');
-
-    // Wait for page to load
-    cy.waitForPageLoad('alerts', {
-      contains: 'Security alerts',
-    });
 
     // Filter table to only show alerts for the test detector
     cy.get(`input[type="search"]`).type(`${testDetector.name}{enter}`);
