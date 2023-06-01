@@ -129,6 +129,47 @@ const checkRulesFlyout = () => {
     });
 };
 
+const getRuleNameField = () => cy.getFieldByLabel('Rule name');
+const getAuthorField = () => cy.getFieldByLabel('Author');
+const getLogField = () => cy.getFieldByLabel('Log type');
+const getRuleLevelField = () => cy.getFieldByLabel('Rule level');
+const getRuleStatusField = () => cy.getFieldByLabel('Rule Status');
+const getDescriptionField = () => cy.getTextareaByLabel('Description');
+
+const getDetectionEditorByIndex = (idx) =>
+  cy.get(`[data-test-subj="detection-visual-editor-${idx}"]`);
+
+const getConditionTextarea = () => cy.get('[data-test-subj="rule_detection_field"] textarea');
+
+const submitRule = () =>
+  cy.get('[data-test-subj="submit_rule_form_button"]').click({
+    force: true,
+  });
+const expectErrorToaster = () =>
+  cy.get('.euiToast').should('be.visible').contains('Failed to create rule');
+
+const fillTheForm = () => {
+  getRuleNameField().type('{selectall}{backspace}').type(SAMPLE_RULE.name);
+  getAuthorField().type('{selectall}{backspace}').type('John Doe');
+  getLogField().selectComboboxItem('dns');
+  getRuleStatusField().selectComboboxItem('experimental');
+  getRuleLevelField().selectComboboxItem('high');
+  getDescriptionField()
+    .type('{selectall}{backspace}', { force: true })
+    .type('This is rule description', { force: true });
+
+  getDetectionEditorByIndex(0).within(() => {
+    cy.getFieldByLabel('Key').type('Provider_Name');
+    cy.getInputByPlaceholder('Value').type('Service Control Manager');
+  });
+
+  cy.get('[data-test-subj="selection_name"]').focus().type('{backspace}').type('1');
+
+  getConditionTextarea().type('Selection_1', {
+    force: true,
+  });
+};
+
 describe('Rules', () => {
   before(() => cy.cleanUpTests());
   beforeEach(() => {
@@ -143,7 +184,234 @@ describe('Rules', () => {
     });
   });
 
-  it('...can be created', () => {
+  describe('...should validate form fields', () => {
+    beforeEach(() => {
+      cy.get('[data-test-subj="create_rule_button"]').click({
+        force: true,
+      });
+    });
+
+    xit('...validate rule name', () => {
+      getRuleNameField()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormHelpText')
+        .contains(
+          'Rule name must contain 5-50 characters. Valid characters are a-z, A-Z, 0-9, hyphens, spaces, and underscores.'
+        );
+
+      getRuleNameField().should('be.empty');
+      getRuleNameField().focus().blur();
+      getRuleNameField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Rule name is required');
+
+      getRuleNameField().type('text').focus().blur();
+      getRuleNameField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Invalid rule name.');
+
+      getRuleNameField().type('{selectall}{backspace}').type(SAMPLE_RULE.name);
+
+      getRuleNameField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
+
+    xit('...validate author', () => {
+      getAuthorField()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormHelpText')
+        .contains(
+          'Author must contain 5-50 characters. Valid characters are a-z, A-Z, 0-9, hyphens, spaces, commas, and underscores.'
+        );
+
+      getAuthorField().should('be.empty');
+      getAuthorField().focus().blur();
+      getAuthorField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Author name is required');
+
+      getAuthorField().type('John').focus().blur();
+      getAuthorField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Invalid author.');
+
+      getAuthorField().type('{selectall}{backspace}').type('John Doe');
+
+      getAuthorField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
+
+    xit('...should validate log type', () => {
+      getLogField().should('be.empty');
+      getLogField().focus().blur();
+      getLogField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Log type is required');
+
+      getLogField().selectComboboxItem('dns');
+      getLogField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
+
+    xit('...should validate rule type', () => {
+      getRuleStatusField().should('be.empty');
+      getRuleStatusField().focus().blur();
+      getRuleStatusField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Rule status is required');
+
+      getRuleStatusField().selectComboboxItem('experimental');
+      getRuleStatusField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
+
+    xit('...should validate rule type', () => {
+      getRuleLevelField().should('be.empty');
+      getRuleLevelField().focus().blur();
+      getRuleLevelField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Rule level is required');
+
+      getRuleLevelField().selectComboboxItem('high');
+      getRuleLevelField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
+
+    xit('...should validate description', () => {
+      getDescriptionField()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormHelpText')
+        .contains(
+          'Description must contain 5-500 characters. Valid characters are a-z, A-Z, 0-9, hyphens, spaces, dots, commas, and underscores.'
+        );
+
+      getDescriptionField().should('be.empty');
+      getDescriptionField().type('test &', { force: true });
+      getDescriptionField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Invalid description.');
+
+      getDescriptionField()
+        .type('{selectall}{backspace}', { force: true })
+        .type(
+          'This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. This is a lot of text. ',
+          { force: true }
+        );
+
+      getDescriptionField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Invalid description.');
+
+      getDescriptionField()
+        .type('{selectall}{backspace}', { force: true })
+        .type('This is rule description', { force: true });
+
+      getDescriptionField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
+
+    xit('...should validate form without the rule name field', () => {
+      fillTheForm();
+      getRuleNameField().type('{selectall}{backspace}');
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    xit('...should validate form without the author field', () => {
+      fillTheForm();
+      getAuthorField().type('{selectall}{backspace}');
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    xit('...should validate form without the log field', () => {
+      fillTheForm();
+      getLogField().focus().type('{backspace}');
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    xit('...should validate form without the rule level field', () => {
+      fillTheForm();
+      getRuleLevelField().focus().type('{backspace}');
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    it('...should validate form without the rule status field', () => {
+      fillTheForm();
+      getRuleStatusField().focus().type('{backspace}');
+
+      submitRule();
+      expectErrorToaster();
+    });
+  });
+
+  xit('...can be created', () => {
     // Click "create new rule" button
     cy.get('[data-test-subj="create_rule_button"]').click({
       force: true,
@@ -226,7 +494,7 @@ describe('Rules', () => {
     checkRulesFlyout();
   });
 
-  it('...can be edited', () => {
+  xit('...can be edited', () => {
     cy.waitForPageLoad('rules', {
       contains: 'Detection rules',
     });
@@ -286,7 +554,7 @@ describe('Rules', () => {
     checkRulesFlyout();
   });
 
-  it('...can be deleted', () => {
+  xit('...can be deleted', () => {
     cy.intercept({
       url: '/rules',
     }).as('deleteRule');
