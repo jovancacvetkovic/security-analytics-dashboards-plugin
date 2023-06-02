@@ -134,7 +134,11 @@ const getAuthorField = () => cy.getFieldByLabel('Author');
 const getLogField = () => cy.getFieldByLabel('Log type');
 const getRuleLevelField = () => cy.getFieldByLabel('Rule level');
 const getRuleStatusField = () => cy.getFieldByLabel('Rule Status');
+const getTagsField = () => cy.getFieldByLabel('Tags');
 const getDescriptionField = () => cy.getTextareaByLabel('Description');
+const getSelectionNameField = () => cy.get('[data-test-subj="selection_name"]');
+const getSelectionKeyField = () => cy.getFieldByLabel('Key');
+const getSelectionValueField = () => cy.get('[data-test-subj="selection_field_value"]');
 
 const getDetectionEditorByIndex = (idx) =>
   cy.get(`[data-test-subj="detection-visual-editor-${idx}"]`);
@@ -159,11 +163,11 @@ const fillTheForm = () => {
     .type('This is rule description', { force: true });
 
   getDetectionEditorByIndex(0).within(() => {
-    cy.getFieldByLabel('Key').type('Provider_Name');
-    cy.getInputByPlaceholder('Value').type('Service Control Manager');
+    getSelectionKeyField().type('Provider_Name');
+    getSelectionValueField().type('Service Control Manager');
   });
 
-  cy.get('[data-test-subj="selection_name"]').focus().type('{backspace}').type('1');
+  getSelectionNameField().focus().type('{backspace}').type('1');
 
   getConditionTextarea().type('Selection_1', {
     force: true,
@@ -191,7 +195,7 @@ describe('Rules', () => {
       });
     });
 
-    xit('...validate rule name', () => {
+    it('...validate rule name', () => {
       getRuleNameField()
         .parents('.euiFormRow__fieldWrapper')
         .find('.euiFormHelpText')
@@ -228,7 +232,7 @@ describe('Rules', () => {
         .should('not.exist');
     });
 
-    xit('...validate author', () => {
+    it('...validate author', () => {
       getAuthorField()
         .parents('.euiFormRow__fieldWrapper')
         .find('.euiFormHelpText')
@@ -265,7 +269,7 @@ describe('Rules', () => {
         .should('not.exist');
     });
 
-    xit('...should validate log type', () => {
+    it('...should validate log type', () => {
       getLogField().should('be.empty');
       getLogField().focus().blur();
       getLogField()
@@ -285,7 +289,7 @@ describe('Rules', () => {
         .should('not.exist');
     });
 
-    xit('...should validate rule type', () => {
+    it('...should validate rule type', () => {
       getRuleStatusField().should('be.empty');
       getRuleStatusField().focus().blur();
       getRuleStatusField()
@@ -305,7 +309,7 @@ describe('Rules', () => {
         .should('not.exist');
     });
 
-    xit('...should validate rule type', () => {
+    it('...should validate rule level', () => {
       getRuleLevelField().should('be.empty');
       getRuleLevelField().focus().blur();
       getRuleLevelField()
@@ -325,7 +329,7 @@ describe('Rules', () => {
         .should('not.exist');
     });
 
-    xit('...should validate description', () => {
+    it('...should validate description', () => {
       getDescriptionField()
         .parents('.euiFormRow__fieldWrapper')
         .find('.euiFormHelpText')
@@ -370,7 +374,77 @@ describe('Rules', () => {
         .should('not.exist');
     });
 
-    xit('...should validate form without the rule name field', () => {
+    xit('...should validate tags', () => {
+      getTagsField()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormHelpText')
+        .contains("Tags must start with 'attack.'");
+
+      getTagsField().should('be.empty');
+
+      getTagsField().type('noprefix');
+      getRuleLevelField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('be.visible')
+        .contains('Invalid tag');
+
+      getTagsField().type('{selectall}{backspace}').type('attack.tag');
+      getRuleLevelField()
+        .focus()
+        .blur()
+        .parents('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
+
+    it('...should validate selection key field', () => {
+      getDetectionEditorByIndex(0).within(() => {
+        getSelectionKeyField().should('be.empty');
+        getSelectionKeyField().type('Fiel');
+        getSelectionKeyField()
+          .focus()
+          .blur()
+          .parents('.euiFormRow__fieldWrapper')
+          .find('.euiFormErrorText')
+          .should('be.visible')
+          .contains('Invalid key name.');
+
+        getSelectionKeyField().type('{selectall}{backspace}').type('FieldName');
+        getSelectionKeyField()
+          .focus()
+          .blur()
+          .parents('.euiFormRow__fieldWrapper')
+          .find('.euiFormErrorText')
+          .should('not.exist');
+      });
+    });
+
+    it('...should validate selection value field', () => {
+      getDetectionEditorByIndex(0).within(() => {
+        getSelectionValueField().should('be.empty');
+        getSelectionValueField().focus().blur();
+        getSelectionValueField()
+          .focus()
+          .blur()
+          .parents('.euiFormRow__fieldWrapper')
+          .find('.euiFormErrorText')
+          .should('be.visible')
+          .contains('Value is required');
+
+        getSelectionValueField().type('{selectall}{backspace}').type('FieldValue');
+        getSelectionValueField()
+          .focus()
+          .blur()
+          .parents('.euiFormRow__fieldWrapper')
+          .find('.euiFormErrorText')
+          .should('not.exist');
+      });
+    });
+
+    it('...should validate form without the rule name field', () => {
       fillTheForm();
       getRuleNameField().type('{selectall}{backspace}');
 
@@ -378,7 +452,7 @@ describe('Rules', () => {
       expectErrorToaster();
     });
 
-    xit('...should validate form without the author field', () => {
+    it('...should validate form without the author field', () => {
       fillTheForm();
       getAuthorField().type('{selectall}{backspace}');
 
@@ -386,7 +460,7 @@ describe('Rules', () => {
       expectErrorToaster();
     });
 
-    xit('...should validate form without the log field', () => {
+    it('...should validate form without the log field', () => {
       fillTheForm();
       getLogField().focus().type('{backspace}');
 
@@ -394,7 +468,7 @@ describe('Rules', () => {
       expectErrorToaster();
     });
 
-    xit('...should validate form without the rule level field', () => {
+    it('...should validate form without the rule level field', () => {
       fillTheForm();
       getRuleLevelField().focus().type('{backspace}');
 
@@ -409,9 +483,55 @@ describe('Rules', () => {
       submitRule();
       expectErrorToaster();
     });
+
+    xit('...should validate form without tags field', () => {
+      fillTheForm();
+      getTagsField().type('{selectall}{backspace}').type('noprefix.tag');
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    it('...should validate form without condition field', () => {
+      fillTheForm();
+      getConditionTextarea().type('{selectall}{backspace}', {
+        force: true,
+      });
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    it('...should validate form without selection key field', () => {
+      fillTheForm();
+      getDetectionEditorByIndex(0).within(() => {
+        getSelectionKeyField().type('{selectall}{backspace}');
+      });
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    it('...should validate form without selection key value field', () => {
+      fillTheForm();
+      getDetectionEditorByIndex(0).within(() => {
+        getSelectionValueField().type('{selectall}{backspace}');
+      });
+
+      submitRule();
+      expectErrorToaster();
+    });
+
+    xit('...should validate form without selection name field', () => {
+      fillTheForm();
+      getSelectionNameField().focus().type('{selectall}{backspace}');
+
+      submitRule();
+      expectErrorToaster();
+    });
   });
 
-  xit('...can be created', () => {
+  it('...can be created', () => {
     // Click "create new rule" button
     cy.get('[data-test-subj="create_rule_button"]').click({
       force: true,
@@ -494,7 +614,7 @@ describe('Rules', () => {
     checkRulesFlyout();
   });
 
-  xit('...can be edited', () => {
+  it('...can be edited', () => {
     cy.waitForPageLoad('rules', {
       contains: 'Detection rules',
     });
@@ -554,7 +674,7 @@ describe('Rules', () => {
     checkRulesFlyout();
   });
 
-  xit('...can be deleted', () => {
+  it('...can be deleted', () => {
     cy.intercept({
       url: '/rules',
     }).as('deleteRule');
