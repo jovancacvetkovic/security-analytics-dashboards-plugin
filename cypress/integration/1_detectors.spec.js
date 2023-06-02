@@ -108,14 +108,20 @@ const validatePendingFieldMappingsPanel = (mappings) => {
   });
 };
 
-const createDetector = (detectorName, dataSource, expectFailure) => {
-  getCreateDetectorButton().click({ force: true });
+const getDescriptionField = () => cy.getTextareaByLabel('Description - optional');
 
-  // TEST DETAILS PAGE
+const fillDefineDetectorPage = (detectorName, dataSource) => {
   getNameField().type(detectorName);
   getDataSourceField().selectComboboxItem(dataSource);
 
   selectDnsLogType();
+};
+
+const createDetector = (detectorName, dataSource, expectFailure) => {
+  getCreateDetectorButton().click({ force: true });
+
+  // TEST DETAILS PAGE
+  fillDefineDetectorPage(detectorName, dataSource);
 
   cy.getElementByText('.euiAccordion .euiTitle', 'Detection rules (14 selected)')
     .click({ force: true, timeout: 5000 })
@@ -260,63 +266,84 @@ describe('Detectors', () => {
     cy.wait('@detectorsSearch').should('have.property', 'state', 'Complete');
   });
 
-  it('...should validate form', () => {
-    getCreateDetectorButton().click({ force: true });
+  describe('...should validate form fields', () => {
+    beforeEach(() => {
+      getCreateDetectorButton().click({ force: true });
+    });
+    it('...should validate detector name', () => {
+      getNameField().should('be.empty');
+      getNameField().type('text').focus().blur();
 
-    getNextButton().should('be.disabled');
+      getNameField()
+        .parentsUntil('.euiFormRow__fieldWrapper')
+        .siblings()
+        .contains(
+          'Name should only consist of upper and lowercase letters, numbers 0-9, hyphens, spaces, and underscores. Use between 5 and 50 characters.'
+        );
 
-    getNameField().should('be.empty');
-    getNameField().type('text').focus().blur();
+      getNameField()
+        .type(' and more text')
+        .focus()
+        .blur()
+        .parentsUntil('.euiFormRow__fieldWrapper')
+        .siblings()
+        .should('not.exist');
+    });
 
-    getNameField()
-      .parentsUntil('.euiFormRow__fieldWrapper')
-      .siblings()
-      .contains(
-        'Name should only consist of upper and lowercase letters, numbers 0-9, hyphens, spaces, and underscores. Use between 5 and 50 characters.'
-      );
+    it('...should validate description', () => {
+      getDescriptionField().should('be.empty');
+      getDescriptionField().type('some description...', { force: true });
+      getDescriptionField().should('not.be.empty');
+    });
 
-    getNameField()
-      .type(' and more text')
-      .focus()
-      .blur()
-      .parentsUntil('.euiFormRow__fieldWrapper')
-      .siblings()
-      .should('not.exist');
-    getNextButton().should('be.disabled');
+    it('...should validate data source field', () => {
+      getDataSourceField()
+        .focus()
+        .blur()
+        .parentsUntil('.euiFormRow__fieldWrapper')
+        .siblings()
+        .contains('Select an input source');
+      getNextButton().should('be.disabled');
 
-    getDataSourceField()
-      .focus()
-      .blur()
-      .parentsUntil('.euiFormRow__fieldWrapper')
-      .siblings()
-      .contains('Select an input source');
-    getNextButton().should('be.disabled');
+      getDataSourceField().selectComboboxItem(cypressIndexDns);
+      getDataSourceField()
+        .focus()
+        .blur()
+        .parentsUntil('.euiFormRow__fieldWrapper')
+        .find('.euiFormErrorText')
+        .should('not.exist');
+    });
 
-    getDataSourceField().selectComboboxItem(cypressIndexDns);
-    getDataSourceField()
-      .focus()
-      .blur()
-      .parentsUntil('.euiFormRow__fieldWrapper')
-      .find('.euiFormErrorText')
-      .should('not.exist');
-    getNextButton().should('not.be.disabled');
-  });
+    it('...should validate form', () => {
+      getNextButton().should('be.disabled');
 
-  it('...should show mappings warning', () => {
-    getCreateDetectorButton().click({ force: true });
+      getNameField().type('detector name');
+      getNextButton().should('be.disabled');
 
-    getDataSourceField().selectComboboxItem(cypressIndexDns);
+      getDataSourceField().selectComboboxItem(cypressIndexDns);
+      getNextButton().should('not.be.disabled');
 
-    selectDnsLogType();
+      getNameField().type('{selectall}{backspace}');
+      getNextButton().should('be.disabled');
+    });
 
-    getDataSourceField().selectComboboxItem(cypressIndexWindows);
-    getDataSourceField().focus().blur();
+    it('...should show mappings warning', () => {
+      getDataSourceField().selectComboboxItem(cypressIndexDns);
+      selectDnsLogType();
 
-    cy.get('.euiCallOut')
-      .should('be.visible')
-      .contains(
-        'To avoid issues with field mappings, we recommend creating separate detectors for different log types.'
-      );
+      getDataSourceField().selectComboboxItem(cypressIndexWindows);
+      getDataSourceField().focus().blur();
+
+      cy.get('.euiCallOut')
+        .should('be.visible')
+        .contains('The selected log sources contain different log types');
+
+      cy.get('.euiCallOut')
+        .should('be.visible')
+        .contains(
+          'To avoid issues with field mappings, we recommend creating separate detectors for different log types.'
+        );
+    });
   });
 
   it('...can fail creation', () => {
